@@ -15,13 +15,13 @@ jobs:
           rm postman-cli.tar.gz
       - name: Login to Postman CLI
         env:
-          POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
+          POSTMAN_API_KEY: PMAK-6667b94c2095f8000108ac87-7404d27a3d593c782cb35f6778d5bd5e20
         run: postman login --with-api-key $POSTMAN_API_KEY
       - name: Run API tests
         env:
           GITHUB_WORKSPACE: ${{ github.workspace }}
           GITHUB_RUN_ID: ${{ github.run_id }}
         run: |
-          postman collection run "1127056-cb937e3a-b2fc-479f-97ee-38d52b2fc70e" --integration-id "53049-${GITHUB_RUN_ID}"
+          postman collection run "1127056-cb937e3a-b2fc-479f-97ee-38d52b2fc70e" --integration-id "53051-${GITHUB_RUN_ID}"
           # Run your API using Postman CLI
-          postman api lint --integration-id 53049
+          postman api lint --integration-id 53051
