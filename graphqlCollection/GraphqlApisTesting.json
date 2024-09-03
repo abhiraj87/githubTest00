@@ -1,0 +1,25 @@
+{
+	"info": {
+		"_postman_id": "bd34e302-d1fd-4f30-be89-2edeb70c7839",
+		"name": "GraphqlApisTesting",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "34577150-bd34e302-d1fd-4f30-be89-2edeb70c7839"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"id": "3b8fdee9-eda4-46c5-9d23-097b088d51b7",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	]
+}
