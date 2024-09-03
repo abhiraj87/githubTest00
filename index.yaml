@@ -1,0 +1,98 @@
+openapi: '3.0.0'
+info:
+  version: '1.0.0'
+  title: 'Bookstore API'
+  description: Manage books in a bookstore
+
+paths:
+  /books:
+    get:
+      summary: Get all books
+      responses:
+        '200':
+          description: A list of books
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /books/{bookId}:
+    parameters:
+      - name: bookId
+        description: The unique identifier of the book
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get a book by ID
+      responses:
+        '200':
+          description: The book corresponding to the provided `bookId`
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '404':
+          description: Book not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    Book:
+      type: object
+      required:
+        - id
+        - title
+        - author
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the book
+        title:
+          type: string
+          description: The title of the book
+        author:
+          type: string
+          description: The author of the book
+        genre:
+          type: string
+          description: The genre of the book
+        year:
+          type: integer
+          description: The year of publication of the book
+    
+    Error:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          description: A human-readable error message
+
+security:
+  - ApiKey: []
+
+securitySchemes:
+  ApiKey:
+    type: apiKey
+    in: header
+    name: X-Api-Key
