@@ -1,98 +1,77 @@
 openapi: '3.0.0'
 info:
   version: '1.0.0'
-  title: 'Bookstore API'
-  description: Manage books in a bookstore
+  title: 'Sample API'
+  description: Buy or rent spacecrafts
 
 paths:
-  /books:
-    get:
-      summary: Get all books
-      responses:
-        '200':
-          description: A list of books
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Book'
-        '500':
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-
-  /books/{bookId}:
+  /spacecrafts/{spacecraftId}:
     parameters:
-      - name: bookId
-        description: The unique identifier of the book
+      - name: spacecraftId
+        description: The unique identifier of the spacecraft
         in: path
         required: true
         schema:
-          type: string
+          $ref: '#/components/schemas/SpacecraftId'
     get:
-      summary: Get a book by ID
+      summary: Read a spacecraft
       responses:
         '200':
-          description: The book corresponding to the provided `bookId`
+          description: The spacecraft corresponding to the provided `spacecraftId`
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Book'
-        '404':
-          description: Book not found
+                $ref: '#/components/schemas/Spacecraft'
+        404:
+          description: No spacecraft found for the provided `spacecraftId`
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        '500':
+        500:
           description: Unexpected error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-
 components:
   schemas:
-    Book:
+    SpacecraftId:
+      description: The unique identifier of a spacecraft
+      type: string
+    Spacecraft:
       type: object
       required:
         - id
-        - title
-        - author
+        - name
+        - type
       properties:
         id:
+          $ref: '#/components/schemas/SpacecraftId'
+        name:
           type: string
-          description: The unique identifier of the book
-        title:
+        type:
           type: string
-          description: The title of the book
-        author:
+          enum:
+            - capsule
+            - probe
+            - satellite
+            - spaceplane
+            - station
+        description:
           type: string
-          description: The author of the book
-        genre:
-          type: string
-          description: The genre of the book
-        year:
-          type: integer
-          description: The year of publication of the book
-    
     Error:
       type: object
       required:
         - message
       properties:
         message:
+          description: A human readable error message
           type: string
-          description: A human-readable error message
-
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      in: header
+      name: X-Api-Key
 security:
   - ApiKey: []
-
-securitySchemes:
-  ApiKey:
-    type: apiKey
-    in: header
-    name: X-Api-Key

@@ -1,13 +1,14 @@
 {
 	"info": {
-		"_postman_id": "0c0905f9-caf8-47f0-a941-18a6a2a0ddd7",
+		"_postman_id": "4937ee10-4d87-4a55-9ad7-6945d5ea6ac7",
 		"name": "Demo-testing",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "34577150-4937ee10-4d87-4a55-9ad7-6945d5ea6ac7"
 	},
 	"item": [
 		{
 			"name": "https://api.getpostman.com/mocks",
-			"id": "50e099d1-8a66-4d1c-a1ec-a8449daf7bb7",
+			"id": "93c9662c-9083-44b6-9184-645bb1807a2b",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true,
 				"strictSSL": false,
@@ -21,10 +22,18 @@
 			"request": {
 				"auth": {
 					"type": "apikey",
-					"apikey": {
-						"key": "x-api-key",
-						"value": "{{devKey}}"
-					}
+					"apikey": [
+						{
+							"key": "key",
+							"value": "x-api-key",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "{{devKey}}",
+							"type": "string"
+						}
+					]
 				},
 				"method": "POST",
 				"header": [],
@@ -37,7 +46,18 @@
 						}
 					}
 				},
-				"url": "https://api.getpostman.com/mocks"
+				"url": {
+					"raw": "https://api.getpostman.com/mocks",
+					"protocol": "https",
+					"host": [
+						"api",
+						"getpostman",
+						"com"
+					],
+					"path": [
+						"mocks"
+					]
+				}
 			},
 			"response": []
 		}
