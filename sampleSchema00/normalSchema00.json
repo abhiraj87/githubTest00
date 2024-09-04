@@ -1,0 +1,4756 @@
+
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Service Ordering Management TMF641 v4.0",
+    "description": "## TMF API Reference : TMF 641 - Service Ordering Management\n\n Version 4.0 - Sprint S1 2020\n\nThe Service Order API provides a standardized mechanism for managing Service Order, a type of order which can be used to place an order between internal Customer Order management system to service order management system or between a service provider and a partner and vice versa.\n\n### Service Order resource\nA service order will describe a list of service order items.  A service order item references an action on an existing  or  future  service.  By  service  we  designed  Customer Facing  Service  (CFS)  as  well  as  Resource Facing Service (RFS).\nFrom a component perspective, a service order should be available\n- from a Service Orchestration Component (and it could mix CFS and RFS)\n- from an Infrastructure Control & Management component (and it would have only RFS)\n\n### TMF641 performs the following operations on service order resource :\n- Retrieval of a service order or a collection of service orders depending on filter criteria\n- Partial update of a service order (including updating rules)\n- Creation of a service order (including default values and creation rules)\n- Deletion of service order (for administration purposes)\n- Notification of events on Service order\n\n**Cancel Service Order resource**\n\nThis resource is used to request a service order cancellation.\n\n**TMF641 provides following operations on Cancel Service Order resource :**\n\n- Retrieval of a cancel service order or a collection of cancel service orders \n- Creation of a cancel service order \n- Notification of events on cancel service order.\n\nCopyright \u00a9 TM Forum 2019. All Rights Reserved",
+    "version": "2.0",
+    "contact": {
+      "email": "dltaft@telus.com",
+      "name": "TsAFT teams"
+    }
+  },
+  "host": "somapi-serviceordermgmt-dv.paas-app-west-np.tsl.telus.com",
+  "basePath": "\/tmf-api\/serviceOrderingManagement\/v2\/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application\/json;charset=utf-8"
+  ],
+  "produces": [
+    "application\/json;charset=utf-8"
+  ],
+  "tags": [
+    {
+      "name": "serviceOrder"
+    },
+    {
+      "name": "Not Supported"
+    },
+    {
+      "name": "Requires Review"
+    }
+  ],
+  "x-apiname": "serviceOrderingManagement",
+  "x-tmfdomain": "service",
+  "x-api-engagement-num": "64",
+  "x-cmdbid": "20830",
+  "x-stoplight": {
+    "docs": {
+      "showModels": false
+    }
+  },
+  "paths": {
+    "\/serviceOrder": {
+      "get": {
+        "operationId": "listServiceOrder",
+        "summary": "List or find ServiceOrder objects",
+        "description": "This operation list or find ServiceOrder entities",
+        "tags": [
+          "serviceOrder"
+        ],
+        "parameters": [
+          {
+            "name": "fields",
+            "description": "Comma-separated properties to be provided in response",
+            "required": false,
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "offset",
+            "description": "Requested index for start of resources to be provided in response",
+            "required": false,
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "limit",
+            "description": "Requested number of resources to be provided in response",
+            "required": false,
+            "in": "query",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This Operation is not implemented.",
+            "headers": {
+              "X-Result-Count": {
+                "description": "Actual number of items returned in the response body",
+                "type": "integer"
+              },
+              "X-Total-Count": {
+                "description": "Total number of items matching criteria",
+                "type": "integer"
+              }
+            },
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#\/definitions\/ServiceOrder"
+              }
+            }
+          },
+          "501": {
+            "description": "This Operation is not implemented.",
+            "schema": {
+              "$ref": "#\/definitions\/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createServiceOrder",
+        "summary": "Creates a ServiceOrder",
+        "description": "This operation creates a ServiceOrder entity.",
+        "tags": [
+          "serviceOrder"
+        ],
+        "parameters": [
+          {
+            "name": "serviceOrder",
+            "description": "The ServiceOrder to be created",
+            "required": true,
+            "schema": {
+              "$ref": "#\/definitions\/ServiceOrder_Create"
+            },
+            "in": "body"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#\/definitions\/ServiceOrder"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#\/definitions\/Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#\/definitions\/Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#\/definitions\/Error"
+            }
+          },
+          "405": {
+            "description": "Method Not allowed",
+            "schema": {
+              "$ref": "#\/definitions\/Error"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#\/definitions\/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#\/definitions\/Error"
+            }
+          }
+        }
+      }
+    },
+    "\/serviceOrder\/{id}": {
+      "get": {
+        "operationId": "retrieveServiceOrder",
+        "summary": "Retrieves a ServiceOrder by ID",
+        "description": "This operation retrieves a ServiceOrder entity. Attribute selection is enabled for all first level attributes.",
+        "tags": [
+          "serviceOrder"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Identifier of the ServiceOrder",
+            "required": true,
+            "type": "string",
+            "in": "path"
+          },
+          {
+            "name": "fields",
+            "description": "Comma-separated properties to provide in response",
+            "required": false,
+            "type": "string",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This Operation is not implemented.",
+            "schema": {
+              "$ref": "#\/definitions\/ServiceOrder"
+            }
+          },
+          "501": {
+            "description": "This Operation is not implemented.",
+            "schema": {
+              "$ref": "#\/definitions\/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "patchServiceOrder",
+        "summary": "Updates partially a ServiceOrder",
+        "description": "This operation updates partially a ServiceOrder entity.",
+        "tags": [
+          "serviceOrder"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Identifier of the ServiceOrder",
+            "required": true,
+            "type": "string",
+            "in": "path"
+          },
+          {
+            "name": "serviceOrder",
+            "description": "The ServiceOrder to be updated",
+            "required": true,
+            "schema": {
+              "$ref": "#\/definitions\/ServiceOrder_Update"
+            },
+            "in": "body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This Operation is not implemented.",
+            "schema": {
+              "$ref": "#\/definitions\/ServiceOrder"
+            }
+          },
+          "501": {
+            "description": "This Operation is not implemented.",
+            "schema": {
+              "$ref": "#\/definitions\/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteServiceOrder",
+        "summary": "Deletes a ServiceOrder",
+        "description": "This operation deletes a ServiceOrder entity.",
+        "tags": [
+          "serviceOrder"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Identifier of the ServiceOrder",
+            "required": true,
+            "type": "string",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "This Operation is not implemented."
+          },
+          "501": {
+            "description": "This Operation is not implemented.",
+            "schema": {
+              "$ref": "#\/definitions\/Error"
+            }
+          }
+        }
+      }
+    },
+    "\/cancelServiceOrder": {
+      "get": {
+        "operationId": "listCancelServiceOrder",
+        "summary": "List or find CancelServiceOrder objects",
+        "description": "This operation list or find CancelServiceOrder entities",
+        "tags": [
+          "cancelServiceOrder"
+        ],
+        "parameters": [
+          {
+            "name": "fields",
+            "description": "Comma-separated properties to be provided in response",
+            "required": false,
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "offset",
+            "description": "Requested index for start of resources to be provided in response",
+            "required": false,
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "limit",
+            "description": "Requested number of resources to be provided in response",
+            "required": false,
+            "in": "query",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This Operation is not implemented.",
+            "headers": {
+              "X-Result-Count": {
+                "description": "Actual number of items returned in the response body",
+                "type": "integer"
+              },
+              "X-Total-Count": {
+                "description": "Total number of items matching criteria",
+                "type": "integer"
+              }
+            },
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#\/definitions\/CancelServiceOrder"
+              }
+            }
+          },
+          "501": {
+            "description": "This Operation is not implemented.",
+            "schema": {
+              "$ref": "#\/definitions\/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createCancelServiceOrder",
+        "summary": "Creates a CancelServiceOrder",
+        "description": "This operation creates a CancelServiceOrder entity.",
+        "tags": [
+          "cancelServiceOrder"
+        ],
+        "parameters": [
+          {
+            "name": "cancelServiceOrder",
+            "description": "The CancelServiceOrder to be created",
+            "required": true,
+            "schema": {
+              "$ref": "#\/definitions\/CancelServiceOrder_Create"
+            },
+            "in": "body"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "This Operation is not implemented.",
+            "schema": {
+              "$ref": "#\/definitions\/CancelServiceOrder"
+            }
+          },
+          "501": {
+            "description": "This Operation is not implemented.",
+            "schema": {
+              "$ref": "#\/definitions\/Error"
+            }
+          }
+        }
+      }
+    },
+    "\/cancelServiceOrder\/{id}": {
+      "get": {
+        "operationId": "retrieveCancelServiceOrder",
+        "summary": "Retrieves a CancelServiceOrder by ID",
+        "description": "This operation retrieves a CancelServiceOrder entity. Attribute selection is enabled for all first level attributes.",
+        "tags": [
+          "cancelServiceOrder"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Identifier of the CancelServiceOrder",
+            "required": true,
+            "type": "string",
+            "in": "path"
+          },
+          {
+            "name": "fields",
+            "description": "Comma-separated properties to provide in response",
+            "required": false,
+            "type": "string",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This Operation is not implemented.",
+            "schema": {
+              "$ref": "#\/definitions\/CancelServiceOrder"
+            }
+          },
+          "501": {
+            "description": "This Operation is not implemented.",
+            "schema": {
+              "$ref": "#\/definitions\/Error"
+            }
+          }
+        }
+      }
+    },
+    "\/hub": {
+      "post": {
+        "operationId": "registerListener",
+        "summary": "Register a listener",
+        "description": "Sets the communication endpoint address the service instance must use to deliver information about its health state, execution state, failures and metricsss.",
+        "tags": [
+          "events subscription"
+        ],
+        "parameters": [
+          {
+            "name": "data",
+            "schema": {
+              "$ref": "#\/definitions\/EventSubscriptionInput"
+            },
+            "required": true,
+            "in": "body",
+            "description": "Data containing the callback endpoint to deliver the information"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "This Operation is not implemented.",
+            "schema": {
+              "$ref": "#\/definitions\/EventSubscription"
+            }
+          },
+          "501": {
+            "description": "This Operation is not implemented.",
+            "schema": {
+              "$ref": "#\/definitions\/Error"
+            }
+          }
+        }
+      }
+    },
+    "\/hub\/{id}": {
+      "delete": {
+        "operationId": "unregisterListener",
+        "summary": "Unregister a listener",
+        "description": "Resets the communication endpoint address the service instance must use to deliver information about its health state, execution state, failures and metrics.",
+        "tags": [
+          "events subscription"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "type": "string",
+            "required": true,
+            "in": "path",
+            "description": "The id of the registered listener"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "This Operation is not implemented."
+          },
+          "501": {
+            "description": "This Operation is not implemented.",
+            "schema": {
+              "$ref": "#\/definitions\/Error"
+            }
+          }
+        }
+      }
+    },
+    "\/listener\/serviceOrderCreateEvent": {
+      "post": {
+        "operationId": "listenToServiceOrderCreateEvent",
+        "summary": "Client listener for entity ServiceOrderCreateEvent",
+        "description": "Example of a client listener for receiving the notification ServiceOrderCreateEvent",
+        "tags": [
+          "notification listeners (client side)"
+        ],
+        "parameters": [
+          {
+            "name": "data",
+            "required": true,
+            "in": "body",
+            "description": "The event data",
+            "schema": {
+              "$ref": "#\/definitions\/ServiceOrderCreateEvent"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "This Operation is not implemented.",
+            "schema": {
+              "$ref": "#\/definitions\/EventSubscription"
+            }
+          },
+          "501": {
+            "description": "This Operation is not implemented.",
+            "schema": {
+              "$ref": "#\/definitions\/Error"
+            }
+          }
+        }
+      }
+    },
+    "\/listener\/serviceOrderAttributeValueChangeEvent": {
+      "post": {
+        "operationId": "listenToServiceOrderAttributeValueChangeEvent",
+        "summary": "Client listener for entity ServiceOrderAttributeValueChangeEvent",
+        "description": "Example of a client listener for receiving the notification ServiceOrderAttributeValueChangeEvent",
+        "tags": [
+          "notification listeners (client side)"
+        ],
+        "parameters": [
+          {
+            "name": "data",
+            "required": true,
+            "in": "body",
+            "description": "The event data",
+            "schema": {
+              "$ref": "#\/definitions\/ServiceOrderAttributeValueChangeEvent"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "This Operation is not implemented.",
+            "schema": {
+              "$ref": "#\/definitions\/EventSubscription"
+            }
+          },
+          "501": {
+            "description": "This Operation is not implemented.",
+            "schema": {
+              "$ref": "#\/definitions\/Error"
+            }
+          }
+        }
+      }
+    },
+    "\/listener\/serviceOrderStateChangeEvent": {
+      "post": {
+        "operationId": "listenToServiceOrderStateChangeEvent",
+        "summary": "Client listener for entity ServiceOrderStateChangeEvent",
+        "description": "Example of a client listener for receiving the notification ServiceOrderStateChangeEvent",
+        "tags": [
+          "notification listeners (client side)"
+        ],
+        "parameters": [
+          {
+            "name": "data",
+            "required": true,
+            "in": "body",
+            "description": "The event data",
+            "schema": {
+              "$ref": "#\/definitions\/ServiceOrderStateChangeEvent"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "This Operation is not implemented.",
+            "schema": {
+              "$ref": "#\/definitions\/EventSubscription"
+            }
+          },
+          "501": {
+            "description": "This Operation is not implemented.",
+            "schema": {
+              "$ref": "#\/definitions\/Error"
+            }
+          }
+        }
+      }
+    },
+    "\/listener\/serviceOrderDeleteEvent": {
+      "post": {
+        "operationId": "listenToServiceOrderDeleteEvent",
+        "summary": "Client listener for entity ServiceOrderDeleteEvent",
+        "description": "Example of a client listener for receiving the notification ServiceOrderDeleteEvent",
+        "tags": [
+          "notification listeners (client side)"
+        ],
+        "parameters": [
+          {
+            "name": "data",
+            "required": true,
+            "in": "body",
+            "description": "The event data",
+            "schema": {
+              "$ref": "#\/definitions\/ServiceOrderDeleteEvent"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "This Operation is not implemented.",
+            "schema": {
+              "$ref": "#\/definitions\/EventSubscription"
+            }
+          },
+          "501": {
+            "description": "This Operation is not implemented.",
+            "schema": {
+              "$ref": "#\/definitions\/Error"
+            }
+          }
+        }
+      }
+    },
+    "\/listener\/serviceOrderInformationRequiredEvent": {
+      "post": {
+        "operationId": "listenToServiceOrderInformationRequiredEvent",
+        "summary": "Client listener for entity ServiceOrderInformationRequiredEvent",
+        "description": "Example of a client listener for receiving the notification ServiceOrderInformationRequiredEvent",
+        "tags": [
+          "notification listeners (client side)"
+        ],
+        "parameters": [
+          {
+            "name": "data",
+            "required": true,
+            "in": "body",
+            "description": "The event data",
+            "schema": {
+              "$ref": "#\/definitions\/ServiceOrderInformationRequiredEvent"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "This Operation is not implemented.",
+            "schema": {
+              "$ref": "#\/definitions\/EventSubscription"
+            }
+          },
+          "501": {
+            "description": "This Operation is not implemented.",
+            "schema": {
+              "$ref": "#\/definitions\/Error"
+            }
+          }
+        }
+      }
+    },
+    "\/listener\/cancelServiceOrderCreateEvent": {
+      "post": {
+        "operationId": "listenToCancelServiceOrderCreateEvent",
+        "summary": "Client listener for entity CancelServiceOrderCreateEvent",
+        "description": "Example of a client listener for receiving the notification CancelServiceOrderCreateEvent",
+        "tags": [
+          "notification listeners (client side)"
+        ],
+        "parameters": [
+          {
+            "name": "data",
+            "required": true,
+            "in": "body",
+            "description": "The event data",
+            "schema": {
+              "$ref": "#\/definitions\/CancelServiceOrderCreateEvent"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "This Operation is not implemented.",
+            "schema": {
+              "$ref": "#\/definitions\/EventSubscription"
+            }
+          },
+          "501": {
+            "description": "This Operation is not implemented.",
+            "schema": {
+              "$ref": "#\/definitions\/Error"
+            }
+          }
+        }
+      }
+    },
+    "\/listener\/cancelServiceOrderStateChangeEvent": {
+      "post": {
+        "operationId": "listenToCancelServiceOrderStateChangeEvent",
+        "summary": "Client listener for entity CancelServiceOrderStateChangeEvent",
+        "description": "Example of a client listener for receiving the notification CancelServiceOrderStateChangeEvent",
+        "tags": [
+          "notification listeners (client side)"
+        ],
+        "parameters": [
+          {
+            "name": "data",
+            "required": true,
+            "in": "body",
+            "description": "The event data",
+            "schema": {
+              "$ref": "#\/definitions\/CancelServiceOrderStateChangeEvent"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "This Operation is not implemented.",
+            "schema": {
+              "$ref": "#\/definitions\/EventSubscription"
+            }
+          },
+          "501": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#\/definitions\/Error"
+            }
+          }
+        }
+      }
+    },
+    "\/listener\/cancelServiceOrderInformationRequiredEvent": {
+      "post": {
+        "operationId": "listenToCancelServiceOrderInformationRequiredEvent",
+        "summary": "Client listener for entity CancelServiceOrderInformationRequiredEvent",
+        "description": "Example of a client listener for receiving the notification CancelServiceOrderInformationRequiredEvent",
+        "tags": [
+          "notification listeners (client side)"
+        ],
+        "parameters": [
+          {
+            "name": "data",
+            "required": true,
+            "in": "body",
+            "description": "The event data",
+            "schema": {
+              "$ref": "#\/definitions\/CancelServiceOrderInformationRequiredEvent"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "This Operation is not implemented.",
+            "schema": {
+              "$ref": "#\/definitions\/EventSubscription"
+            }
+          },
+          "501": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#\/definitions\/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Any": {},
+    "AppointmentRef": {
+      "type": "object",
+      "description": "Refers gan appointment, such as a Customer presentation or internal meeting or site visit",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The identifier of the referred appointment"
+        },
+        "href": {
+          "type": "string",
+          "description": "The reference of the appointment"
+        },
+        "description": {
+          "type": "string",
+          "description": "An explanatory text regarding the appointment made with a party"
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        },
+        "@referredType": {
+          "type": "string",
+          "description": "The actual type of the target instance when needed for disambiguation"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "CancelOrder": {
+      "type": "object",
+      "description": "A Order cancel is a type of task which  can  be used to place a request to cancel an order",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id of the cancellation request (this is not an order id)"
+        },
+        "href": {
+          "type": "string",
+          "description": "Hyperlink to access the cancellation request"
+        },
+        "cancellationReason": {
+          "type": "string",
+          "description": "Reason why the order is cancelled."
+        },
+        "effectiveCancellationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when the order is cancelled."
+        },
+        "requestedCancellationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when the submitter wants the order to be cancelled"
+        },
+        "state": {
+          "$ref": "#\/definitions\/TaskStateType",
+          "description": "Tracks the lifecycle status of the cancellation request, such as Acknowledged, Rejected, InProgress, Pending and so on."
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        }
+      }
+    },
+    "CancelServiceOrder": {
+      "type": "object",
+      "description": "Request for cancellation an existing Service order",
+      "required": [
+        "ServiceOrder"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id of the cancellation request (this is not an order id)"
+        },
+        "href": {
+          "type": "string",
+          "description": "Hyperlink to access the cancellation request"
+        },
+        "cancellationReason": {
+          "type": "string",
+          "description": "Reason why the order is cancelled."
+        },
+        "effectiveCancellationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when the order is cancelled."
+        },
+        "requestedCancellationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when the submitter wants the order to be cancelled"
+        },
+        "ServiceOrder": {
+          "$ref": "#\/definitions\/ServiceOrderRef"
+        },
+        "state": {
+          "$ref": "#\/definitions\/TaskStateType",
+          "description": "Tracks the lifecycle status of the cancellation request, such as Acknowledged, Rejected, InProgress, Pending and so on."
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        }
+      }
+    },
+    "CancelServiceOrder_Create": {
+      "type": "object",
+      "description": "Request for cancellation an existing Service order\nSkipped properties: id,href,state,effectiveCancellationDate",
+      "required": [
+        "ServiceOrder"
+      ],
+      "properties": {
+        "cancellationReason": {
+          "type": "string",
+          "description": "Reason why the order is cancelled."
+        },
+        "requestedCancellationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when the submitter wants the order to be cancelled"
+        },
+        "ServiceOrder": {
+          "$ref": "#\/definitions\/ServiceOrderRef"
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        }
+      }
+    },
+    "Characteristic": {
+      "type": "object",
+      "description": "Describes a given characteristic of an object or entity through a name\/value pair.",
+      "required": [
+        "name",
+        "value"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the characteristic"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the characteristic"
+        },
+        "valueType": {
+          "type": "string",
+          "description": "Data type of the value of the characteristic"
+        },
+        "characteristicRelationship": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/CharacteristicRelationship"
+          }
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the characteristic"
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        }
+      }
+    },
+    "CharacteristicRelationship": {
+      "type": "object",
+      "description": "Another Characteristic that is related to the current Characteristic;",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the characteristic"
+        },
+        "relationshipType": {
+          "type": "string",
+          "description": "The type of relationship"
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        }
+      }
+    },
+    "ConstraintRef": {
+      "type": "object",
+      "description": "Constraint reference. The Constraint resource represents a policy\/rule applied to an entity or entity spec.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "reference id to the target constraint"
+        },
+        "href": {
+          "type": "string",
+          "description": "Hyperlink reference to the target constraint"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name given to the constraint"
+        },
+        "version": {
+          "type": "string",
+          "description": "constraint version"
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        },
+        "@referredType": {
+          "type": "string",
+          "description": "The (class) type of the referred constraint"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "EntityRef": {
+      "type": "object",
+      "description": "Entity reference schema to be use for all entityRef class.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of a related entity."
+        },
+        "href": {
+          "type": "string",
+          "description": "Reference of the related entity."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the related entity."
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        },
+        "@referredType": {
+          "type": "string",
+          "description": "The actual type of the target instance when needed for disambiguation."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "ExternalReference": {
+      "type": "object",
+      "description": "External reference of the individual or reference in other system",
+      "properties": {
+        "externalReferenceType": {
+          "type": "string",
+          "description": "Type of the external reference"
+        },
+        "name": {
+          "type": "string",
+          "description": "External reference name"
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        }
+      }
+    },
+    "Feature": {
+      "type": "object",
+      "description": "Configuration feature.",
+      "required": [
+        "featureCharacteristic",
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the feature."
+        },
+        "isBundle": {
+          "type": "boolean",
+          "description": "True if this is a feature group. Default is false."
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": "True if this feature is enabled. Default is true."
+        },
+        "name": {
+          "type": "string",
+          "description": "This is the name for the feature."
+        },
+        "constraint": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/ConstraintRef"
+          },
+          "description": "This is a list of feature constraints."
+        },
+        "featureCharacteristic": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/Characteristic"
+          },
+          "minItems": 1,
+          "description": "This is a list of Characteristics for a particular feature."
+        },
+        "featureRelationship": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/FeatureRelationship"
+          }
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        }
+      }
+    },
+    "FeatureRelationship": {
+      "type": "object",
+      "description": "Configuration feature",
+      "required": [
+        "name",
+        "relationshipType"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the target feature."
+        },
+        "name": {
+          "type": "string",
+          "description": "This is the name of the target feature."
+        },
+        "relationshipType": {
+          "type": "string",
+          "description": "This is the type of the feature relationship."
+        },
+        "validFor": {
+          "$ref": "#\/definitions\/TimePeriod",
+          "description": "The period for which this feature relationship is valid."
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        }
+      }
+    },
+    "ManagedEntity": {
+      "type": "object",
+      "description": "Managed Entity described via a reference or litterally (by value)",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of a managed entity."
+        },
+        "href": {
+          "type": "string",
+          "description": "Reference of the managed entity."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the managed entity."
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        },
+        "@referredType": {
+          "type": "string",
+          "description": "The actual type of the target instance when needed for disambiguation."
+        }
+      }
+    },
+    "Note": {
+      "type": "object",
+      "description": "Extra information about a given entity",
+      "required": [
+        "text"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the note within its containing entity (may or may not be globally unique, depending on provider implementation)"
+        },
+        "author": {
+          "type": "string",
+          "description": "Author of the note"
+        },
+        "date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date of the note"
+        },
+        "text": {
+          "type": "string",
+          "description": "Text of the note"
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        }
+      }
+    },
+    "OrderItemActionType": {
+      "type": "string",
+      "description": "action to be performed on the product",
+      "enum": [
+        "add",
+        "modify",
+        "delete",
+        "noChange"
+      ]
+    },
+    "Place": {
+      "type": "object",
+      "description": "Place reference. Place defines the places where the products are sold or delivered.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the place"
+        },
+        "href": {
+          "type": "string",
+          "description": "Unique reference of the place"
+        },
+        "name": {
+          "type": "string",
+          "description": "A user-friendly name for the place, such as [Paris Store], [London Store], [Main Home]"
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        }
+      }
+    },
+    "PlaceRef": {
+      "type": "object",
+      "description": "Place reference. PlaceRef defines the placeRefs where the products are sold or delivered.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of a related entity."
+        },
+        "href": {
+          "type": "string",
+          "description": "Reference of the related entity."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the related entity."
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        },
+        "@referredType": {
+          "type": "string",
+          "description": "The actual type of the target instance when needed for disambiguation."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "RelatedManagedEntityRefOrValue": {
+      "type": "object",
+      "description": "A related managed entity to be created defined by value or existing defined by reference. The polymorphic attributes @type, @schemaLocation & @referredType are related to the Entity entity and not the RelatedEntityRefOrValue class itself",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of a managed entity."
+        },
+        "href": {
+          "type": "string",
+          "description": "Reference of the managed entity."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the managed entity."
+        },
+        "role": {
+          "type": "string",
+          "description": "Role played by the related managed entity"
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        },
+        "@referredType": {
+          "type": "string",
+          "description": "The actual type of the target instance when needed for disambiguation."
+        }
+      }
+    },
+    "RelatedParty": {
+      "type": "object",
+      "description": "Related Entity reference. A related party defines party or party role linked to a specific entity.",
+      "required": [
+        "@referredType",
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of a related entity."
+        },
+        "href": {
+          "type": "string",
+          "description": "Reference of the related entity."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the related entity."
+        },
+        "role": {
+          "type": "string",
+          "description": "Role played by the related party"
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        },
+        "@referredType": {
+          "type": "string",
+          "description": "The actual type of the target instance when needed for disambiguation."
+        }
+      }
+    },
+    "RelatedPlaceRefOrValue": {
+      "type": "object",
+      "description": "Related Entity reference. A related place defines a place described by reference or by value linked to a specific entity. The polymorphic attributes @type, @schemaLocation & @referredType are related to the place entity and not the RelatedPlaceRefOrValue class itself",
+      "required": [
+        "role"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the place"
+        },
+        "href": {
+          "type": "string",
+          "description": "Unique reference of the place"
+        },
+        "name": {
+          "type": "string",
+          "description": "A user-friendly name for the place, such as [Paris Store], [London Store], [Main Home]"
+        },
+        "role": {
+          "type": "string"
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        },
+        "@referredType": {
+          "type": "string",
+          "description": "The actual type of the target instance when needed for disambiguation."
+        }
+      }
+    },
+    "RelatedServiceOrderItem": {
+      "type": "object",
+      "description": "RelatedServiceOrderItem (a ServiceOrder item) .The service order item which triggered service creation\/change\/termination.",
+      "required": [
+        "serviceOrderId"
+      ],
+      "properties": {
+        "itemId": {
+          "type": "string",
+          "description": "Identifier of the order item where the service was managed"
+        },
+        "role": {
+          "type": "string",
+          "description": "role of the service order item for this service"
+        },
+        "serviceOrderHref": {
+          "type": "string",
+          "description": "Reference of the related entity."
+        },
+        "serviceOrderId": {
+          "type": "string",
+          "description": "Unique identifier of a related entity."
+        },
+        "itemAction": {
+          "$ref": "#\/definitions\/OrderItemActionType",
+          "description": "Action of the order item for this service"
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        },
+        "@referredType": {
+          "type": "string",
+          "description": "The actual type of the target instance when needed for disambiguation."
+        }
+      }
+    },
+    "ResourceRef": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of a related entity."
+        },
+        "href": {
+          "type": "string",
+          "description": "Reference of the related entity."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the resource"
+        },
+        "value": {
+          "type": "string",
+          "description": "The resource value that can be used to identify a resource with a public key (e.g.: a tel nr, an msisdn)"
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        },
+        "@referredType": {
+          "type": "string",
+          "description": "The actual type of the target instance when needed for disambiguation."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "Service": {
+      "type": "object",
+      "description": "Service is a base class for defining the Service hierarchy. All Services are characterized as either being possibly visible and usable by a Customer or not. This gives rise to the two subclasses of Service: CustomerFacingService and ResourceFacingService.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the service"
+        },
+        "href": {
+          "type": "string",
+          "description": "Reference of the service"
+        },
+        "category": {
+          "type": "string",
+          "description": "Is it a customer facing or resource facing service"
+        },
+        "description": {
+          "type": "string",
+          "description": "Free-text description of the service"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when the service ends"
+        },
+        "hasStarted": {
+          "type": "boolean",
+          "description": "If TRUE, this Service has already been started"
+        },
+        "isServiceEnabled": {
+          "type": "boolean",
+          "description": "If FALSE, this particular Service has NOT been enabled for use"
+        },
+        "isStateful": {
+          "type": "boolean",
+          "description": "If TRUE, this Service can be changed without affecting any other services"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the service"
+        },
+        "serviceDate": {
+          "type": "string",
+          "description": "Date when the service was created (whatever its status)."
+        },
+        "serviceType": {
+          "type": "string",
+          "description": "Business type of the service"
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when the service starts"
+        },
+        "startMode": {
+          "type": "string",
+          "description": "This attribute is an enumerated integer that indicates how the Service is started, such as: 0: Unknown; 1: Automatically by the managed environment; 2: Automatically by the owning device; 3: Manually by the Provider of the Service; 4: Manually by a Customer of the Provider; 5: Any of the above"
+        },
+        "feature": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/Feature"
+          },
+          "description": "A list of feature associated with this service "
+        },
+        "note": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/Note"
+          },
+          "description": "A list of notes made on this service"
+        },
+        "place": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/RelatedPlaceRefOrValue"
+          },
+          "description": "A list of places (Place [*]). Used to define a place useful for the service (for example a geographical place whre the service is installed)"
+        },
+        "relatedManagedEntity": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/RelatedManagedEntityRefOrValue"
+          },
+          "description": "A list of related managed entity in relationship with this service "
+        },
+        "relatedParty": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/RelatedParty"
+          },
+          "description": "A list of related party references (RelatedParty [*]). A related party defines party or party role linked to a specific entity"
+        },
+        "serviceCharacteristic": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/Characteristic"
+          },
+          "description": "A list of characteristics that characterize this service (ServiceCharacteristic [*]) "
+        },
+        "serviceOrderItem": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/RelatedServiceOrderItem"
+          },
+          "description": "A list of service order items related to this service"
+        },
+        "serviceRelationship": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/ServiceRelationship"
+          },
+          "description": "A list of service relationships (ServiceRelationship [*]). Describes links with other service(s) in the inventory (useful for describing relies-on, relies-from between CFS for example)."
+        },
+        "serviceSpecification": {
+          "$ref": "#\/definitions\/ServiceSpecificationRef",
+          "description": "The specification from which this service was instantiated"
+        },
+        "state": {
+          "$ref": "#\/definitions\/ServiceStateType",
+          "description": "The life cycle state of the service, such as designed, reserved, active, etc..."
+        },
+        "supportingResource": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/ResourceRef"
+          },
+          "description": "A list of supporting resources (SupportingResource [*]).Note: only Service of type RFS can be associated with Resources"
+        },
+        "supportingService": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/ServiceRefOrValue"
+          },
+          "description": "A list of supporting services (SupportingService [*]). A collection of services that support this service (bundling, link CFS to RFS)"
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        }
+      }
+    },
+    "ServiceOrder": {
+      "type": "object",
+      "required": [
+        "serviceOrderItem"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID created on repository side"
+        },
+        "href": {
+          "type": "string",
+          "description": "Hyperlink to access the order"
+        },
+        "cancellationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when the order is cancelled. This is used when order is cancelled. "
+        },
+        "cancellationReason": {
+          "type": "string",
+          "description": "Reason why the order is cancelled. This is used when order is cancelled. "
+        },
+        "category": {
+          "type": "string",
+          "description": "Used to categorize the order, useful for the OM system, such as: Broadband, TVOption"
+        },
+        "completionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Effective delivery date amended by the provider"
+        },
+        "description": {
+          "type": "string",
+          "description": "A free-text description of the service order"
+        },
+        "expectedCompletionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expected delivery date amended by the provider"
+        },
+        "externalId": {
+          "type": "string",
+          "description": "ID given by the consumer to facilitate searches"
+        },
+        "notificationContact": {
+          "type": "string",
+          "description": "Contact attached to the order to send back information regarding this order"
+        },
+        "orderDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "priority": {
+          "type": "string",
+          "description": "Can be used by consumers to prioritize orders in a Service Order Management system"
+        },
+        "requestedCompletionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Requested delivery date from the requestors perspective"
+        },
+        "requestedStartDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Order start date wished by the requestor"
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when the order was started for processing"
+        },
+        "externalReference": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/ExternalReference"
+          }
+        },
+        "note": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/Note"
+          },
+          "description": "Extra-information about the order; e.g. useful to add extra delivery information that could be useful for a human process"
+        },
+        "orderRelationship": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/ServiceOrderRelationship"
+          },
+          "description": "A list of service orders related to this order (e.g. prerequisite, dependent on)"
+        },
+        "relatedParty": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/RelatedParty"
+          },
+          "description": "A list of parties which are involved in this order and the role they are playing"
+        },
+        "serviceOrderItem": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/ServiceOrderItem"
+          },
+          "minItems": 1,
+          "description": "A list of service order items to be processed by this order"
+        },
+        "state": {
+          "$ref": "#\/definitions\/ServiceOrderStateType",
+          "description": "State of the order: described in the state-machine diagram"
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        }
+      }
+    },
+    "ServiceOrder_Create": {
+      "type": "object",
+      "description": "\nSkipped properties: id,href,orderDate,completionDate,expectedCompletionDate,startDate,state",
+      "required": [
+        "serviceOrderItem"
+      ],
+      "properties": {
+        "cancellationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when the order is cancelled. This is used when order is cancelled. "
+        },
+        "cancellationReason": {
+          "type": "string",
+          "description": "Reason why the order is cancelled. This is used when order is cancelled. "
+        },
+        "category": {
+          "type": "string",
+          "description": "Used to categorize the order, useful for the OM system, such as: Broadband, TVOption"
+        },
+        "description": {
+          "type": "string",
+          "description": "A free-text description of the service order"
+        },
+        "externalId": {
+          "type": "string",
+          "description": "ID given by the consumer to facilitate searches"
+        },
+        "notificationContact": {
+          "type": "string",
+          "description": "Contact attached to the order to send back information regarding this order"
+        },
+        "priority": {
+          "type": "string",
+          "description": "Can be used by consumers to prioritize orders in a Service Order Management system"
+        },
+        "requestedCompletionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Requested delivery date from the requestors perspective"
+        },
+        "requestedStartDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Order start date wished by the requestor"
+        },
+        "externalReference": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/ExternalReference"
+          }
+        },
+        "note": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/Note"
+          },
+          "description": "Extra-information about the order; e.g. useful to add extra delivery information that could be useful for a human process"
+        },
+        "orderRelationship": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/ServiceOrderRelationship"
+          },
+          "description": "A list of service orders related to this order (e.g. prerequisite, dependent on)"
+        },
+        "relatedParty": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/RelatedParty"
+          },
+          "description": "A list of parties which are involved in this order and the role they are playing"
+        },
+        "serviceOrderItem": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/ServiceOrderItem"
+          },
+          "minItems": 1,
+          "description": "A list of service order items to be processed by this order"
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        }
+      }
+    },
+    "ServiceOrder_Update": {
+      "type": "object",
+      "description": "\nSkipped properties: id,href,orderDate",
+      "required": [
+        "serviceOrderItem"
+      ],
+      "properties": {
+        "cancellationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when the order is cancelled. This is used when order is cancelled. "
+        },
+        "cancellationReason": {
+          "type": "string",
+          "description": "Reason why the order is cancelled. This is used when order is cancelled. "
+        },
+        "category": {
+          "type": "string",
+          "description": "Used to categorize the order, useful for the OM system, such as: Broadband, TVOption"
+        },
+        "completionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Effective delivery date amended by the provider"
+        },
+        "description": {
+          "type": "string",
+          "description": "A free-text description of the service order"
+        },
+        "expectedCompletionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expected delivery date amended by the provider"
+        },
+        "externalId": {
+          "type": "string",
+          "description": "ID given by the consumer to facilitate searches"
+        },
+        "notificationContact": {
+          "type": "string",
+          "description": "Contact attached to the order to send back information regarding this order"
+        },
+        "priority": {
+          "type": "string",
+          "description": "Can be used by consumers to prioritize orders in a Service Order Management system"
+        },
+        "requestedCompletionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Requested delivery date from the requestors perspective"
+        },
+        "requestedStartDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Order start date wished by the requestor"
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when the order was started for processing"
+        },
+        "externalReference": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/ExternalReference"
+          }
+        },
+        "note": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/Note"
+          },
+          "description": "Extra-information about the order; e.g. useful to add extra delivery information that could be useful for a human process"
+        },
+        "orderRelationship": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/ServiceOrderRelationship"
+          },
+          "description": "A list of service orders related to this order (e.g. prerequisite, dependent on)"
+        },
+        "relatedParty": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/RelatedParty"
+          },
+          "description": "A list of parties which are involved in this order and the role they are playing"
+        },
+        "serviceOrderItem": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/ServiceOrderItem"
+          },
+          "minItems": 1,
+          "description": "A list of service order items to be processed by this order"
+        },
+        "state": {
+          "$ref": "#\/definitions\/ServiceOrderStateType",
+          "description": "State of the order: described in the state-machine diagram"
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        }
+      }
+    },
+    "ServiceOrderItem": {
+      "type": "object",
+      "required": [
+        "action",
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the individual line item"
+        },
+        "quantity": {
+          "type": "integer",
+          "description": "Quantity ordered"
+        },
+        "action": {
+          "$ref": "#\/definitions\/OrderItemActionType",
+          "description": "The action to be carried out on the Service. Can be: add, modify, delete, noChange"
+        },
+        "appointment": {
+          "$ref": "#\/definitions\/AppointmentRef",
+          "description": "An appointment that was set up with a related party for this order item"
+        },
+        "service": {
+          "$ref": "#\/definitions\/ServiceRefOrValue",
+          "description": "The Service to be acted on by the order item"
+        },
+        "serviceOrderItemRelationship": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/ServiceOrderItemRelationship"
+          },
+          "description": "A list of order items related to this order item"
+        },
+        "state": {
+          "$ref": "#\/definitions\/ServiceOrderItemStateType",
+          "description": "State of the order item: described in the state machine diagram. This is the requested state."
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        }
+      }
+    },
+    "ServiceOrderItemRef": {
+      "type": "object",
+      "properties": {
+        "itemId": {
+          "type": "string",
+          "description": "Identifier of the line item"
+        },
+        "serviceOrderHref": {
+          "type": "string",
+          "description": "Link to the order to which this item belongs to"
+        },
+        "serviceOrderId": {
+          "type": "string",
+          "description": "Identifier of the order that this item belongs to"
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        },
+        "@referredType": {
+          "type": "string",
+          "description": "The actual type of the target instance when needed for disambiguation."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "ServiceOrderItemRelationship": {
+      "type": "object",
+      "description": "Linked service order item to the one containing this attribute",
+      "required": [
+        "relationshipType"
+      ],
+      "properties": {
+        "relationshipType": {
+          "type": "string",
+          "description": "The type of related order item, can be: dependency if the order item needs to be not started until another order item is complete"
+        },
+        "orderItem": {
+          "$ref": "#\/definitions\/ServiceOrderItemRef",
+          "description": "A service order item in relationship with this order item"
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        }
+      }
+    },
+    "ServiceOrderItemStateType": {
+      "type": "string",
+      "description": "Possible values for the state of the order item",
+      "enum": [
+        "acknowledged",
+        "rejected",
+        "pending",
+        "held",
+        "inProgress",
+        "cancelled",
+        "completed",
+        "failed",
+        "assessingCancellation",
+        "pendingCancellation"
+      ]
+    },
+    "ServiceOrderRef": {
+      "type": "object",
+      "description": "Service Order reference. Useful to understand the which was the Service order through which the service was instantiated in the service inventory",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the Service Order"
+        },
+        "href": {
+          "type": "string",
+          "description": "Reference of the Service Order"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the related service order"
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        },
+        "@referredType": {
+          "type": "string",
+          "description": "The actual type of the target instance when needed for disambiguation."
+        }
+      }
+    },
+    "ServiceOrderRelationship": {
+      "type": "object",
+      "description": "Linked service order to the one containing this attribute",
+      "required": [
+        "id",
+        "relationshipType"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of the related order"
+        },
+        "href": {
+          "type": "string",
+          "description": "A hyperlink to the related order"
+        },
+        "relationshipType": {
+          "type": "string",
+          "description": "The type of related order, such as: [dependency] if the order needs to be [not started] until another order item is complete (a service order in this case) or [cross-ref] to keep track of the source order (a productOrder)"
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        },
+        "@referredType": {
+          "type": "string",
+          "description": "The entity type of the related order"
+        }
+      }
+    },
+    "ServiceOrderStateType": {
+      "type": "string",
+      "description": "Possible values for the state of the order",
+      "enum": [
+        "acknowledged",
+        "rejected",
+        "pending",
+        "held",
+        "inProgress",
+        "cancelled",
+        "completed",
+        "failed",
+        "partial",
+        "assessingCancellation",
+        "pendingCancellation"
+      ]
+    },
+    "ServiceRef": {
+      "type": "object",
+      "description": "Service reference, for when Service is used by other entities",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of a related entity."
+        },
+        "href": {
+          "type": "string",
+          "description": "Reference of the related entity."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the related entity."
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        },
+        "@referredType": {
+          "type": "string",
+          "description": "The actual type of the target instance when needed for disambiguation."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "ServiceRefOrValue": {
+      "type": "object",
+      "discriminator": "serviceType",
+      "description": "A Service to be created defined by value or existing defined by reference. The polymorphic attributes @type, @schemaLocation & @referredType are related to the Service entity and not the RelatedServiceRefOrValue class itself",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the service"
+        },
+        "href": {
+          "type": "string",
+          "description": "Reference of the service"
+        },
+        "category": {
+          "type": "string",
+          "description": "Is it a customer facing or resource facing service"
+        },
+        "description": {
+          "type": "string",
+          "description": "Free-text description of the service"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when the service ends"
+        },
+        "hasStarted": {
+          "type": "boolean",
+          "description": "If TRUE, this Service has already been started"
+        },
+        "isServiceEnabled": {
+          "type": "boolean",
+          "description": "If FALSE, this particular Service has NOT been enabled for use"
+        },
+        "isStateful": {
+          "type": "boolean",
+          "description": "If TRUE, this Service can be changed without affecting any other services"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the service"
+        },
+        "serviceDate": {
+          "type": "string",
+          "description": "Date when the service was created (whatever its status)."
+        },
+        "serviceType": {
+          "type": "string",
+          "description": "Business type of the service"
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when the service starts"
+        },
+        "startMode": {
+          "type": "string",
+          "description": "This attribute is an enumerated integer that indicates how the Service is started, such as: 0: Unknown; 1: Automatically by the managed environment; 2: Automatically by the owning device; 3: Manually by the Provider of the Service; 4: Manually by a Customer of the Provider; 5: Any of the above"
+        },
+        "feature": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/Feature"
+          },
+          "description": "A list of feature associated with this service "
+        },
+        "note": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/Note"
+          },
+          "description": "A list of notes made on this service"
+        },
+        "place": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/RelatedPlaceRefOrValue"
+          },
+          "description": "A list of places (Place [*]). Used to define a place useful for the service (for example a geographical place whre the service is installed)"
+        },
+        "relatedManagedEntity": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/RelatedManagedEntityRefOrValue"
+          },
+          "description": "A list of related managed entity in relationship with this service "
+        },
+        "relatedParty": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/RelatedParty"
+          },
+          "description": "A list of related party references (RelatedParty [*]). A related party defines party or party role linked to a specific entity"
+        },
+        "serviceCharacteristic": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/Characteristic"
+          },
+          "description": "A list of characteristics that characterize this service (ServiceCharacteristic [*]) "
+        },
+        "serviceOrderItem": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/RelatedServiceOrderItem"
+          },
+          "description": "A list of service order items related to this service"
+        },
+        "serviceRelationship": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/ServiceRelationship"
+          },
+          "description": "A list of service relationships (ServiceRelationship [*]). Describes links with other service(s) in the inventory (useful for describing relies-on, relies-from between CFS for example)."
+        },
+        "serviceSpecification": {
+          "$ref": "#\/definitions\/ServiceSpecificationRef",
+          "description": "The specification from which this service was instantiated"
+        },
+        "state": {
+          "$ref": "#\/definitions\/ServiceStateType",
+          "description": "The life cycle state of the service, such as designed, reserved, active, etc..."
+        },
+        "supportingResource": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/ResourceRef"
+          },
+          "description": "A list of supporting resources (SupportingResource [*]).Note: only Service of type RFS can be associated with Resources"
+        },
+        "supportingService": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/ServiceRefOrValue"
+          },
+          "description": "A list of supporting services (SupportingService [*]). A collection of services that support this service (bundling, link CFS to RFS)"
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        },
+        "@referredType": {
+          "type": "string",
+          "description": "The actual type of the target instance when needed for disambiguation."
+        }
+      }
+    },
+    "ServiceRelationship": {
+      "type": "object",
+      "required": [
+        "id",
+        "relationshipType"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of a related entity."
+        },
+        "href": {
+          "type": "string",
+          "description": "Reference of the related entity."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the related entity."
+        },
+        "relationshipType": {
+          "type": "string"
+        },
+        "ServiceRelationshipCharacteristic": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/Characteristic"
+          }
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        },
+        "@referredType": {
+          "type": "string",
+          "description": "The actual type of the target instance when needed for disambiguation."
+        }
+      }
+    },
+    "ServiceSpecificationRef": {
+      "type": "object",
+      "description": "Service specification reference: ServiceSpecification(s) required to realize a ProductSpecification.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the service specification"
+        },
+        "href": {
+          "type": "string",
+          "description": "Reference of the serviceSpecification"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the requiredServiceSpecification"
+        },
+        "version": {
+          "type": "string",
+          "description": "Service specification version"
+        },
+        "targetServiceSchema": {
+          "$ref": "#\/definitions\/TargetServiceSchema",
+          "description": "A target service schema reference (TargetServiceSchemaRef). The reference object to the schema and type of target service which is described by service specification."
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name"
+        },
+        "@referredType": {
+          "type": "string",
+          "description": "The actual type of the target instance when needed for disambiguation."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "ServiceStateType": {
+      "type": "string",
+      "description": "Valid values for the lifecycle state of the service",
+      "enum": [
+        "feasibilityChecked",
+        "designed",
+        "reserved",
+        "inactive",
+        "active",
+        "terminated"
+      ]
+    },
+    "TargetServiceSchema": {
+      "type": "object",
+      "description": "The reference object to the schema and type of target service which is described by service specification",
+      "required": [
+        "@schemaLocation",
+        "@type"
+      ],
+      "properties": {
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class"
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "description": "This field provides a link to the schema describing the target service"
+        },
+        "@type": {
+          "type": "string",
+          "description": "Class type of the target service"
+        }
+      }
+    },
+    "TaskStateType": {
+      "type": "string",
+      "description": "Possible values for the state of a task",
+      "enum": [
+        "acknowledged",
+        "terminatedWithError",
+        "inProgress",
+        "done"
+      ]
+    },
+    "TimePeriod": {
+      "type": "object",
+      "description": "A period of time, either as a deadline (endDateTime only) a startDateTime only, or both",
+      "properties": {
+        "endDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End of the time period, using IETC-RFC-3339 format"
+        },
+        "startDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start of the time period, using IETC-RFC-3339 format. If you define a start, you must also define an end"
+        }
+      }
+    },
+    "EventSubscription": {
+      "type": "object",
+      "description": "Sets the communication endpoint address the service instance must use to deliver notification information",
+      "required": [
+        "id",
+        "callback"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id of the listener"
+        },
+        "callback": {
+          "type": "string",
+          "description": "The callback being registered."
+        },
+        "query": {
+          "type": "string",
+          "description": "additional data to be passed"
+        }
+      }
+    },
+    "EventSubscriptionInput": {
+      "type": "object",
+      "description": "Sets the communication endpoint address the service instance must use to deliver notification information",
+      "required": [
+        "callback"
+      ],
+      "properties": {
+        "callback": {
+          "type": "string",
+          "description": "The callback being registered."
+        },
+        "query": {
+          "type": "string",
+          "description": "additional data to be passed"
+        }
+      }
+    },
+    "ServiceOrderCreateEvent": {
+      "type": "object",
+      "description": "The notification data structure",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the Process flow"
+        },
+        "href": {
+          "type": "string",
+          "description": "Reference of the ProcessFlow"
+        },
+        "eventId": {
+          "type": "string",
+          "description": "The identifier of the notification."
+        },
+        "eventTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time of the event occurrence."
+        },
+        "eventType": {
+          "type": "string",
+          "description": "The type of the notification."
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "The correlation id for this event."
+        },
+        "domain": {
+          "type": "string",
+          "description": "The domain of the event."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the event."
+        },
+        "description": {
+          "type": "string",
+          "description": "An explnatory of the event."
+        },
+        "priority": {
+          "type": "string",
+          "description": "A priority."
+        },
+        "timeOcurred": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the event occured."
+        },
+        "event": {
+          "description": "The event payload linked to the involved resource object",
+          "$ref": "#\/definitions\/ServiceOrderCreateEventPayload"
+        }
+      }
+    },
+    "ServiceOrderCreateEventPayload": {
+      "type": "object",
+      "description": "The event data structure",
+      "properties": {
+        "serviceOrder": {
+          "description": "The involved resource data for the event",
+          "$ref": "#\/definitions\/ServiceOrder"
+        }
+      }
+    },
+    "ServiceOrderAttributeValueChangeEvent": {
+      "type": "object",
+      "description": "The notification data structure",
+      "properties": {
+        "eventId": {
+          "type": "string",
+          "description": "The identifier of the notification."
+        },
+        "eventTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time of the event occurrence."
+        },
+        "eventType": {
+          "type": "string",
+          "description": "The type of the notification."
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "The correlation id for this event."
+        },
+        "domain": {
+          "type": "string",
+          "description": "The domain of the event."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the event."
+        },
+        "description": {
+          "type": "string",
+          "description": "An explnatory of the event."
+        },
+        "priority": {
+          "type": "string",
+          "description": "A priority."
+        },
+        "timeOcurred": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the event occured."
+        },
+        "fieldPath": {
+          "type": "string",
+          "description": "The path identifying the object field concerned by this notification."
+        },
+        "event": {
+          "description": "The event payload linked to the involved resource object",
+          "$ref": "#\/definitions\/ServiceOrderAttributeValueChangeEventPayload"
+        }
+      }
+    },
+    "ServiceOrderAttributeValueChangeEventPayload": {
+      "type": "object",
+      "description": "The event data structure",
+      "properties": {
+        "serviceOrder": {
+          "description": "The involved resource data for the event",
+          "$ref": "#\/definitions\/ServiceOrder"
+        }
+      }
+    },
+    "ServiceOrderStateChangeEvent": {
+      "type": "object",
+      "description": "The notification data structure",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the Process flow"
+        },
+        "href": {
+          "type": "string",
+          "description": "Reference of the ProcessFlow"
+        },
+        "eventId": {
+          "type": "string",
+          "description": "The identifier of the notification."
+        },
+        "eventTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time of the event occurrence."
+        },
+        "eventType": {
+          "type": "string",
+          "description": "The type of the notification."
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "The correlation id for this event."
+        },
+        "domain": {
+          "type": "string",
+          "description": "The domain of the event."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the event."
+        },
+        "description": {
+          "type": "string",
+          "description": "An explnatory of the event."
+        },
+        "priority": {
+          "type": "string",
+          "description": "A priority."
+        },
+        "timeOcurred": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the event occured."
+        },
+        "event": {
+          "description": "The event payload linked to the involved resource object",
+          "$ref": "#\/definitions\/ServiceOrderStateChangeEventPayload"
+        }
+      }
+    },
+    "ServiceOrderStateChangeEventPayload": {
+      "type": "object",
+      "description": "The event data structure",
+      "properties": {
+        "serviceOrder": {
+          "description": "The involved resource data for the event",
+          "$ref": "#\/definitions\/ServiceOrder"
+        }
+      }
+    },
+    "ServiceOrderDeleteEvent": {
+      "type": "object",
+      "description": "The notification data structure",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the Process flow"
+        },
+        "href": {
+          "type": "string",
+          "description": "Reference of the ProcessFlow"
+        },
+        "eventId": {
+          "type": "string",
+          "description": "The identifier of the notification."
+        },
+        "eventTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time of the event occurrence."
+        },
+        "eventType": {
+          "type": "string",
+          "description": "The type of the notification."
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "The correlation id for this event."
+        },
+        "domain": {
+          "type": "string",
+          "description": "The domain of the event."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the event."
+        },
+        "description": {
+          "type": "string",
+          "description": "An explnatory of the event."
+        },
+        "priority": {
+          "type": "string",
+          "description": "A priority."
+        },
+        "timeOcurred": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the event occured."
+        },
+        "event": {
+          "description": "The event payload linked to the involved resource object",
+          "$ref": "#\/definitions\/ServiceOrderDeleteEventPayload"
+        }
+      }
+    },
+    "ServiceOrderDeleteEventPayload": {
+      "type": "object",
+      "description": "The event data structure",
+      "properties": {
+        "serviceOrder": {
+          "description": "The involved resource data for the event",
+          "$ref": "#\/definitions\/ServiceOrder"
+        }
+      }
+    },
+    "ServiceOrderInformationRequiredEvent": {
+      "type": "object",
+      "description": "The notification data structure",
+      "properties": {
+        "eventId": {
+          "type": "string",
+          "description": "The identifier of the notification."
+        },
+        "eventTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time of the event occurrence."
+        },
+        "eventType": {
+          "type": "string",
+          "description": "The type of the notification."
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "The correlation id for this event."
+        },
+        "domain": {
+          "type": "string",
+          "description": "The domain of the event."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the event."
+        },
+        "description": {
+          "type": "string",
+          "description": "An explnatory of the event."
+        },
+        "priority": {
+          "type": "string",
+          "description": "A priority."
+        },
+        "timeOcurred": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the event occured."
+        },
+        "fieldPath": {
+          "type": "string",
+          "description": "The path identifying the object field concerned by this notification."
+        },
+        "event": {
+          "description": "The event payload linked to the involved resource object",
+          "$ref": "#\/definitions\/ServiceOrderInformationRequiredEventPayload"
+        }
+      }
+    },
+    "ServiceOrderInformationRequiredEventPayload": {
+      "type": "object",
+      "description": "The event data structure",
+      "properties": {
+        "serviceOrder": {
+          "description": "The involved resource data for the event",
+          "$ref": "#\/definitions\/ServiceOrder"
+        }
+      }
+    },
+    "CancelServiceOrderCreateEvent": {
+      "type": "object",
+      "description": "The notification data structure",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the Process flow"
+        },
+        "href": {
+          "type": "string",
+          "description": "Reference of the ProcessFlow"
+        },
+        "eventId": {
+          "type": "string",
+          "description": "The identifier of the notification."
+        },
+        "eventTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time of the event occurrence."
+        },
+        "eventType": {
+          "type": "string",
+          "description": "The type of the notification."
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "The correlation id for this event."
+        },
+        "domain": {
+          "type": "string",
+          "description": "The domain of the event."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the event."
+        },
+        "description": {
+          "type": "string",
+          "description": "An explnatory of the event."
+        },
+        "priority": {
+          "type": "string",
+          "description": "A priority."
+        },
+        "timeOcurred": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the event occured."
+        },
+        "event": {
+          "description": "The event payload linked to the involved resource object",
+          "$ref": "#\/definitions\/CancelServiceOrderCreateEventPayload"
+        }
+      }
+    },
+    "CancelServiceOrderCreateEventPayload": {
+      "type": "object",
+      "description": "The event data structure",
+      "properties": {
+        "cancelServiceOrder": {
+          "description": "The involved resource data for the event",
+          "$ref": "#\/definitions\/CancelServiceOrder"
+        }
+      }
+    },
+    "CancelServiceOrderStateChangeEvent": {
+      "type": "object",
+      "description": "The notification data structure",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the Process flow"
+        },
+        "href": {
+          "type": "string",
+          "description": "Reference of the ProcessFlow"
+        },
+        "eventId": {
+          "type": "string",
+          "description": "The identifier of the notification."
+        },
+        "eventTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time of the event occurrence."
+        },
+        "eventType": {
+          "type": "string",
+          "description": "The type of the notification."
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "The correlation id for this event."
+        },
+        "domain": {
+          "type": "string",
+          "description": "The domain of the event."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the event."
+        },
+        "description": {
+          "type": "string",
+          "description": "An explnatory of the event."
+        },
+        "priority": {
+          "type": "string",
+          "description": "A priority."
+        },
+        "timeOcurred": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the event occured."
+        },
+        "event": {
+          "description": "The event payload linked to the involved resource object",
+          "$ref": "#\/definitions\/CancelServiceOrderStateChangeEventPayload"
+        }
+      }
+    },
+    "CancelServiceOrderStateChangeEventPayload": {
+      "type": "object",
+      "description": "The event data structure",
+      "properties": {
+        "cancelServiceOrder": {
+          "description": "The involved resource data for the event",
+          "$ref": "#\/definitions\/CancelServiceOrder"
+        }
+      }
+    },
+    "CancelServiceOrderInformationRequiredEvent": {
+      "type": "object",
+      "description": "The notification data structure",
+      "properties": {
+        "eventId": {
+          "type": "string",
+          "description": "The identifier of the notification."
+        },
+        "eventTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time of the event occurrence."
+        },
+        "eventType": {
+          "type": "string",
+          "description": "The type of the notification."
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "The correlation id for this event."
+        },
+        "domain": {
+          "type": "string",
+          "description": "The domain of the event."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the event."
+        },
+        "description": {
+          "type": "string",
+          "description": "An explnatory of the event."
+        },
+        "priority": {
+          "type": "string",
+          "description": "A priority."
+        },
+        "timeOcurred": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the event occured."
+        },
+        "fieldPath": {
+          "type": "string",
+          "description": "The path identifying the object field concerned by this notification."
+        },
+        "event": {
+          "description": "The event payload linked to the involved resource object",
+          "$ref": "#\/definitions\/CancelServiceOrderInformationRequiredEventPayload"
+        }
+      }
+    },
+    "CancelServiceOrderInformationRequiredEventPayload": {
+      "type": "object",
+      "description": "The event data structure",
+      "properties": {
+        "cancelServiceOrder": {
+          "description": "The involved resource data for the event",
+          "$ref": "#\/definitions\/CancelServiceOrder"
+        }
+      }
+    },
+    "LongDistanceIdCodeSetService": {
+      "allOf": [
+        {
+          "$ref": "#\/definitions\/ServiceRefOrValue"
+        },
+        {
+          "type": "object",
+          "title": "LongDistanceIdCodeSetService",
+          "description": "User is prompted with a tone and an announcement. Used to authorize the call and can be up to 24 digits.\n\nThe ID Codes in a set must all be the same (fixed) length. Different sets of codes can have different length.\n\nIf the Customer has both Account Codes and ID Codes, the two are collected together.\n\nNetwork can only collect 32 digits at a time, so if the total digits collected is greater than 32, we have to collect them  separately\n\nThe caller is allowed up to 3 attempts to enter the code \u2013 settable per customer (0-3).\n\nCustomer can allow or disallow ID Codes for each location.\n\nCustomer can specify a Range Privilege with the ID Code.\n\nThis Range Privilege can override the Range Restrictions which might apply to the phone they are using.\n\n",
+          "properties": {
+            "idCodeSetCode": {
+              "type": "string",
+              "example": "LID001",
+              "description": "Unique for organization."
+            },
+            "descriptionText": {
+              "type": "string",
+              "example": "ID code set #1"
+            },
+            "idCodeSetTypeCode": {
+              "type": "string"
+            },
+            "codeLengthNumber": {
+              "type": "number",
+              "example": 3
+            },
+            "idCodes": {
+              "type": "array",
+              "description": "A id code set can be provisioned with no id codes.",
+              "items": {
+                "$ref": "#\/definitions\/LongDistanceIdCode"
+              }
+            }
+          },
+          "required": [
+            "id",
+            "idCodeSetCode",
+            "idCodeSetTypeCode",
+            "codeLengthNumber",
+            "serviceType"
+          ]
+        }
+      ]
+    },
+    "LongDistanceIdCode": {
+      "type": "object",
+      "title": "LongDistanceIdCode",
+      "properties": {
+        "idCode": {
+          "type": "string",
+          "example": "1234",
+          "description": "Individual id code value"
+        },
+        "descriptionText": {
+          "type": "string",
+          "example": "Joe Smith"
+        },
+        "rangePrivilegeSetCode": {
+          "type": "string",
+          "example": "RP001"
+        }
+      },
+      "required": [
+        "idCode"
+      ]
+    },
+    "LongDistanceNetworkService": {
+      "allOf": [
+        {
+          "$ref": "#\/definitions\/ServiceRefOrValue"
+        },
+        {
+          "type": "object",
+          "title": "LongDistanceNetworkService",
+          "description": "NETwork (NET) order entity",
+          "properties": {
+            "networkCode": {
+              "type": "string",
+              "description": "Unique for organization.",
+              "example": "NET001"
+            },
+            "descriptionText": {
+              "type": "string",
+              "maxLength": 32,
+              "example": "Customer network"
+            },
+            "dialPlanSetCode": {
+              "type": "string",
+              "example": "DP01"
+            },
+            "retryNumber": {
+              "type": "integer",
+              "default": 3,
+              "minimum": 1,
+              "maximum": 7
+            },
+            "startTime": {
+              "type": "string",
+              "minLength": 4,
+              "maxLength": 4,
+              "pattern": "^[0-9]{4}$",
+              "example": "0800"
+            },
+            "endTime": {
+              "type": "string",
+              "minLength": 4,
+              "maxLength": 4,
+              "pattern": "^[0-9]{4}$",
+              "example": "1700"
+            },
+            "holidayTableCode": {
+              "type": "string",
+              "example": 0,
+              "description": "0=System, 1=Network"
+            },
+            "announcementCode": {
+              "type": "string",
+              "example": 0,
+              "description": "0=System, 1=Customized"
+            },
+            "reportCode": {
+              "type": "string",
+              "example": 0,
+              "description": "Stubbed and reserved for future use.  0=no reports"
+            }
+          },
+          "required": [
+            "descriptionText",
+            "retryNumber",
+            "startTime",
+            "endTime",
+            "holidayTableCode",
+            "announcementCode",
+            "reportCode"
+          ]
+        }
+      ]
+    },
+    "LongDistanceOriginatingProfileService": {
+      "allOf": [
+        {
+          "$ref": "#\/definitions\/ServiceRefOrValue"
+        },
+        {
+          "type": "object",
+          "title": "LongDistanceOriginatingProfileService",
+          "description": "An Origination Profile applies the IVS origination features to any outgoing calls made from a phone:\n* Custom Announcements \n* Account Codes\n* ID Codes\n* Range Privileges\n* Dial Plans\n* Point of Origin Routing\n\n",
+          "properties": {
+            "originatingProfileCode": {
+              "type": "string",
+              "pattern": "[0-9]",
+              "description": "Unique for organization.",
+              "example": "15015345"
+            },
+            "descriptionText": {
+              "type": "string",
+              "maxLength": 15,
+              "example": "Profile #1"
+            },
+            "networkCode": {
+              "type": "string",
+              "example": "NET001"
+            },
+            "accountCodeLengthNumber": {
+              "type": "integer",
+              "example": 6,
+              "description": "If not null ,  account code prompting feature must be provided.\n\nPrompt with tone and announcement :\n* These are collected and reported (e.g. a law firm may enter an account code to track charges to each of their clients.)\n* Not validated. We check for the length only, not the value.\n* Up to 24 digits.\n* Fixed length per location.\n* If the customer has both Account Codes and ID Codes, we collect them together.\n* Network can only collect 32 digits at a time, so if the total digits collected is greater than 32, we have to collect them  separately\n* Allow the caller up to 3 attempts to enter the code \u2013 settable per customer (0-3).\n"
+            },
+            "localIdCodeSetCode": {
+              "type": "string",
+              "example": "LID001",
+              "description": "If not null ,  id code prompting feature must be provided."
+            },
+            "dialPlanSetCode": {
+              "type": "string",
+              "example": "DP01"
+            },
+            "locationName": {
+              "type": "string",
+              "maxLength": 15,
+              "example": "Vancouver"
+            },
+            "accessTypeCode": {
+              "type": "string",
+              "description": "0 : Station, \n1 : Trunk,\n2 : Remote Access,\n3 : Non-Feat.Station,\n4 : Non-Feat.Trunk,\n5 : Home Access"
+            },
+            "announcementTypeCode": {
+              "type": "string",
+              "default": 0,
+              "example": 0,
+              "description": "0=System, 1=Customized\n\nThe service provides announcements for:\n* Collecting Account Codes, ID Codes, and Authorization Codes\n* Reprompting when an error occurs \n* Denying the call for various reasons\n\nCustomer may want some or all of these announcements customized to their company\n\nNeeds Engineering involved to record and load the announcements so this should not be something Provisioners have to do OR if they do, someone from Engineering will guide them through it\n"
+            },
+            "announcementLanguageCode": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 5
+            },
+            "daylightSavingsInd": {
+              "type": "string"
+            },
+            "tollfreePivotAccessInd": {
+              "type": "string"
+            },
+            "remoteAccessTelephoneNumber": {
+              "type": "string",
+              "maxLength": 24,
+              "example": "8005550000"
+            },
+            "alternateBillingNumberInd": {
+              "type": "string"
+            },
+            "pointOfOriginString": {
+              "type": "string",
+              "maxLength": 19,
+              "example": "ar_all"
+            },
+            "timeZoneCode": {
+              "type": "string",
+              "description": "Reference table",
+              "example": "PST"
+            },
+            "idCodePrompts": {
+              "$ref": "#\/definitions\/LongDistanceIdCodePrompt"
+            },
+            "accountCodePrompts": {
+              "$ref": "#\/definitions\/LongDistanceAccountCodePrompt"
+            },
+            "timeOfDay": {
+              "$ref": "#\/definitions\/LongDistanceTimeOfDay"
+            },
+            "authorizationCodes": {
+              "type": "array",
+              "items": {
+                "$ref": "#\/definitions\/LongDistanceOspAuthorizationCodes"
+              }
+            },
+            "reportCode": {
+              "type": "string",
+              "example": 0,
+              "description": "0=No Reports"
+            }
+          },
+          "required": [
+            "id",
+            "originatingProfileCode",
+            "descriptionText",
+            "networkCode",
+            "locationName",
+            "accessTypeCode",
+            "announcementTypeCode",
+            "announcementLanguageCode",
+            "daylightSavingsInd",
+            "tollfreePivotAccessInd",
+            "timeZoneCode",
+            "serviceType",
+            "reportCode"
+          ]
+        }
+      ]
+    },
+    "LongDistanceTimeOfDay": {
+      "type": "object",
+      "title": "LongDistanceTimeOfDay",
+      "description": "Route to a different number depending on:\n* Time of Day\n* Day of Week\n* Holidays\n\nTo simplify things standard time periods have been defined :\n* Prime Time (business hours Monday-Friday)\n* Non-prime Time\n* Saturdays\n* Sundays & Holidays\n\nOnly one alternate number allowed \n",
+      "properties": {
+        "primeTimeRestriction1Ind": {
+          "type": "string"
+        },
+        "nonPrimeTimeRestriction2Ind": {
+          "type": "string"
+        },
+        "saturdayRestriction3Ind": {
+          "type": "string"
+        },
+        "sundayHolidayRestriction4Ind": {
+          "type": "string"
+        },
+        "alternateTelephoneNumber": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 10,
+          "pattern": "[0-9]",
+          "example": "6042343333"
+        },
+        "holidayTableCode": {
+          "type": "string"
+        },
+        "internationalInd": {
+          "type": "string",
+          "description": "0=North Amrican Numbering Plan , 1=International"
+        },
+        "startTime": {
+          "type": "string",
+          "minLength": 4,
+          "maxLength": 4,
+          "example": "0700"
+        },
+        "endTime": {
+          "type": "string",
+          "minLength": 4,
+          "maxLength": 4
+        }
+      }
+    },
+    "LongDistanceOspPointOfOrigin": {
+      "type": "object",
+      "title": "LongDistanceOspPointOfOrigin",
+      "properties": {
+        "pointOfOriginString": {
+          "type": "string",
+          "example": "wr_All"
+        }
+      },
+      "required": [
+        "pointOfOriginString"
+      ],
+      "description": "* Only applies if you have the Dial Plan feature\n* Route to different numbers based on the Point of Origin of the call. (Example: Dial HELP (4357) in Vancouver and we send the call to the Vancouver Help Desk. Dial HELP in Calgary, and we send you to the Calgary Help Desk.)\n* Routing can apply based on Time of Day also (Example: During Non-prime time, send the call to the National Help Desk)\n"
+    },
+    "LongDistanceOspAuthorizationCodes": {
+      "type": "object",
+      "title": "LongDistanceOspAuthorizationCodes",
+      "minProperties": 0,
+      "maxProperties": 10,
+      "description": "Included if feature enabled. Maximum of 10 allowed.",
+      "properties": {
+        "authorizationCode": {
+          "type": "string",
+          "example": "123456"
+        },
+        "descriptionText": {
+          "type": "string",
+          "example": "Auth Codes #"
+        }
+      },
+      "required": [
+        "authorizationCode",
+        "descriptionText"
+      ]
+    },
+    "LongDistanceIdCodePrompt": {
+      "type": "object",
+      "title": "LongDistanceIdCodePrompt",
+      "description": "Requires that an id code set to be included as part of the request.",
+      "properties": {
+        "dialPlanCollectIdCodeInd": {
+          "type": "string"
+        },
+        "canadaCollectIdCodeInd": {
+          "type": "string"
+        },
+        "usaCollectIdCodeInd": {
+          "type": "string"
+        },
+        "internationalCollectIdCodeInd": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "dialPlanCollectIdCodeInd",
+        "canadaCollectIdCodeInd",
+        "usaCollectIdCodeInd",
+        "internationalCollectIdCodeInd"
+      ]
+    },
+    "LongDistanceAccountCodePrompt": {
+      "type": "object",
+      "title": "LongDistanceAccountCodePrompt",
+      "description": "Requires that the account code length to be included as part of the request.",
+      "properties": {
+        "dialPlanCollectAccountCodeInd": {
+          "type": "string"
+        },
+        "canadaCollectAccountCodeInd": {
+          "type": "string"
+        },
+        "usaCollectAccountCodeInd": {
+          "type": "string"
+        },
+        "internationalCollectAccountCodeInd": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "dialPlanCollectAccountCodeInd",
+        "canadaCollectAccountCodeInd",
+        "usaCollectAccountCodeInd",
+        "internationalCollectAccountCodeInd"
+      ]
+    },
+    "LongDistanceTerminatingProfileService": {
+      "allOf": [
+        {
+          "$ref": "#\/definitions\/ServiceRefOrValue"
+        },
+        {
+          "type": "object",
+          "title": "LongDistanceTerminatingProfileService",
+          "description": "Termination Service Profile (TSP) order entity.  The TSP supports the following features if provided in the request.\n\n* Dynamic Routing\n* Time of Day Routing\n* Closed User Group \n",
+          "properties": {
+            "terminatingProfileCode": {
+              "type": "string",
+              "pattern": "[0-9]",
+              "description": "Unique for organization.",
+              "example": "15015344"
+            },
+            "descriptionText": {
+              "type": "string",
+              "example": "TorontoTermination"
+            },
+            "networkCode": {
+              "type": "string",
+              "example": "NET001"
+            },
+            "locationName": {
+              "type": "string",
+              "example": "Toronto"
+            },
+            "switchOfficeRouteText": {
+              "type": "string",
+              "example": "604432"
+            },
+            "announcementLanguageCode": {
+              "type": "string",
+              "example": "E",
+              "description": "E=English, F=French"
+            },
+            "timeZoneCode": {
+              "type": "string",
+              "example": "PST"
+            },
+            "daylightSavingsInd": {
+              "type": "string",
+              "default": 1,
+              "example": "Y"
+            },
+            "closedUserGroup": {
+              "$ref": "#\/definitions\/LongDistanceTspClosed"
+            },
+            "timeOfDayRouting": {
+              "$ref": "#\/definitions\/LongDistanceTimeOfDay"
+            },
+            "dynamicRouting": {
+              "$ref": "#\/definitions\/LongDistanceDynamicRouting"
+            },
+            "reportCode": {
+              "type": "string",
+              "example": 0,
+              "description": "0=no reports"
+            }
+          },
+          "required": [
+            "id",
+            "terminatingProfileCode",
+            "descriptionText",
+            "networkCode",
+            "locationName",
+            "announcementLanguageCode",
+            "timeZoneCode",
+            "daylightSavingsInd",
+            "serviceType",
+            "reportCode"
+          ]
+        }
+      ]
+    },
+    "LongDistanceDynamicRouting": {
+      "title": "LongDistanceDynamicRouting",
+      "type": "object",
+      "description": "Redirect the call to a different number if any of the following occur: \n* Line Busy\n* No Answer\n* Network Busy\n\nMaximum of 5 hops (first hop is the original number)\n",
+      "properties": {
+        "linebusyCallRedirect1Number": {
+          "$ref": "#\/definitions\/LongDistanceTspDynamicRoutingTn"
+        },
+        "linebusyCallRedirect2Number": {
+          "$ref": "#\/definitions\/LongDistanceTspDynamicRoutingTn"
+        },
+        "linebusyCallRedirect3Number": {
+          "$ref": "#\/definitions\/LongDistanceTspDynamicRoutingTn"
+        },
+        "linebusyCallRedirect4Number": {
+          "$ref": "#\/definitions\/LongDistanceTspDynamicRoutingTn"
+        },
+        "networkbusyCallRedirect1Number": {
+          "$ref": "#\/definitions\/LongDistanceTspDynamicRoutingTn"
+        },
+        "networkbusyCallRedirect2Number": {
+          "$ref": "#\/definitions\/LongDistanceTspDynamicRoutingTn"
+        },
+        "networkbusyCallRedirect3Number": {
+          "$ref": "#\/definitions\/LongDistanceTspDynamicRoutingTn"
+        },
+        "networkbusyCallRedirect4Number": {
+          "$ref": "#\/definitions\/LongDistanceTspDynamicRoutingTn"
+        },
+        "noanswerCallRedirect1Number": {
+          "$ref": "#\/definitions\/LongDistanceTspDynamicRoutingTn"
+        },
+        "noanswerCallRedirect2Number": {
+          "$ref": "#\/definitions\/LongDistanceTspDynamicRoutingTn"
+        },
+        "noanswerCallRedirect3Number": {
+          "$ref": "#\/definitions\/LongDistanceTspDynamicRoutingTn"
+        },
+        "noanswerCallRedirect4Number": {
+          "$ref": "#\/definitions\/LongDistanceTspDynamicRoutingTn"
+        },
+        "dynamicRoutingRingCountNumber": {
+          "type": "number",
+          "example": 3
+        },
+        "hopsNumber": {
+          "type": "number",
+          "example": 5,
+          "description": "The number of hops is calculated based on the maximum count of numbers of a type including the original number.  If number 1 and 2 is populated for lineBusy then number of of hops will be set to 3."
+        }
+      },
+      "required": [
+        "dynamicRoutingRingCountNumber",
+        "hopsNumber"
+      ]
+    },
+    "LongDistanceTspClosed": {
+      "type": "object",
+      "title": "LongDistanceTspClosed",
+      "description": "Option to accept calls only from other IVS phones within an organization.\n\nThe line must be located in TELUS territory to provide a Termination Trigger\n",
+      "properties": {
+        "closedUserGroupTypeCode": {
+          "type": "string",
+          "description": "-1=Not in use,\n0=Accept No Calls,\n1=Accept All Calls,\n2=Only IVS Calls"
+        }
+      }
+    },
+    "LongDistanceDialPlanSetService": {
+      "allOf": [
+        {
+          "$ref": "#\/definitions\/ServiceRefOrValue"
+        },
+        {
+          "type": "object",
+          "title": "LongDistanceDialPlanSetService",
+          "description": "Dial Plans are dialing patterns different than the standard 7 digit, 10 digit, or International calls. (Example : abbreviated dialing)\n\n\nIf the number dialed is not in the Dial Plan, the service will only complete the call using the PSTN if they dialed a valid long distance or international number.\n",
+          "properties": {
+            "dialPlanSetCode": {
+              "type": "string",
+              "example": "DP01",
+              "description": "Unique for organization."
+            },
+            "descriptionText": {
+              "type": "string",
+              "example": "Dial Plan #1"
+            },
+            "officeRouteToNumber": {
+              "type": "string",
+              "example": "604456"
+            },
+            "dialPlans": {
+              "type": "array",
+              "description": "A dial plan set can be provisioned with no dial plans.",
+              "items": {
+                "$ref": "#\/definitions\/LongDistanceDialPlan"
+              }
+            }
+          },
+          "required": [
+            "id",
+            "dialPlanSetCode",
+            "descriptionText",
+            "serviceType"
+          ]
+        }
+      ]
+    },
+    "LongDistanceDialPlan": {
+      "type": "object",
+      "title": "LongDistanceDialPlan",
+      "description": "Each location can have only one Dial Plan but the customer\u2019s network can have multiple Dial Plans.\n\nDial Plans can be variable length \u2013 1-15 digits.\n\nDial Plan numbers cannot start with 0 or 1.\n\nUse # key or time out to indicate end of number.\n",
+      "properties": {
+        "pointOfOriginName": {
+          "type": "string",
+          "example": "in2_ar_all"
+        },
+        "fromString": {
+          "type": "string",
+          "example": "0000000"
+        },
+        "toString": {
+          "type": "string",
+          "example": "9999999"
+        },
+        "destinationPrefixString": {
+          "type": "string",
+          "example": "6477882793"
+        },
+        "callTypeCode": {
+          "type": "string",
+          "example": 0
+        },
+        "digitsToAddNumber": {
+          "type": "integer",
+          "example": 3
+        },
+        "digitsLengthNumber": {
+          "type": "integer",
+          "example": 10
+        }
+      },
+      "required": [
+        "pointOfOriginName",
+        "fromString",
+        "toString",
+        "destinationPrefixString",
+        "callTypeCode",
+        "digitsToAddNumber",
+        "digitsLengthNumber"
+      ]
+    },
+    "LongDistanceIncludeExclude": {
+      "type": "object",
+      "title": "LongDistanceIncludeExclude",
+      "description": "The Customer can customize their Range Privileges by specifying Exclusions and\/or Inclusions on the Standard RPs.\n * Exclusions - can exclude specific 10 Digit numbers, NPAs, NXXs, or Countries. (Example: Can call anywhere in the US except for New Jersey NPA 732.)\n* Inclusions - Can include specific 10 Digit numbers, NPAs, NXXs, or Countries. (Example: Can\u2019t make any international calls except to United Kingdom (country code 44).)\n",
+      "properties": {
+        "fromString": {
+          "type": "string",
+          "example": "403555"
+        },
+        "toString": {
+          "type": "string",
+          "example": "403666"
+        },
+        "includeExcludeCode": {
+          "type": "string",
+          "description": "E=Exclude,\nI=Include"
+        },
+        "countryCodeInd": {
+          "type": "string",
+          "example": 0,
+          "description": "0=NANP,\n1=Country Code"
+        }
+      },
+      "required": [
+        "fromString",
+        "toString",
+        "includeExcludeCode",
+        "countryCodeInd"
+      ]
+    },
+    "LongDistanceTelephoneNumberService": {
+      "allOf": [
+        {
+          "$ref": "#\/definitions\/ServiceRefOrValue"
+        },
+        {
+          "type": "object",
+          "title": "LongDistanceTelephoneNumberService",
+          "description": "Telephone Number (TN)",
+          "properties": {
+            "telephoneNumber": {
+              "type": "string",
+              "example": "6044327856",
+              "description": "Used to specify single or range."
+            },
+            "signallingPointString": {
+              "type": "string",
+              "example": "245-217-001",
+              "default": "245-217-001"
+            },
+            "alternateBillingNumber": {
+              "type": "string",
+              "example": "6045670000"
+            },
+            "billingAgentCode": {
+              "type": "string",
+              "example": "4930"
+            },
+            "serviceProviderCode": {
+              "type": "string",
+              "description": "1=TELUS",
+              "example": "1"
+            },
+            "originatingProfileCode": {
+              "type": "string",
+              "example": "15000001",
+              "description": "Either the OSP and\/or TSP must specified, they both cannot be null."
+            },
+            "terminatingProfileCode": {
+              "type": "string",
+              "example": "15000002",
+              "description": "Either the OSP and\/or TSP must specified, they both cannot be null."
+            }
+          },
+          "required": [
+            "telephoneNumber",
+            "signallingPointString",
+            "billingAgentCode",
+            "serviceProviderCode",
+            "serviceType"
+          ]
+        }
+      ]
+    },
+    "LongDistanceRangePrivilegeService": {
+      "allOf": [
+        {
+          "$ref": "#\/definitions\/ServiceRefOrValue"
+        },
+        {
+          "type": "object",
+          "title": "LongDistanceRangePrivilegeService",
+          "description": "Range Privilege is where in the world you are allowed to call.\n\nStandard Range Privileges:\n* All Calls \u2013 can call anywhere in the world.\n* No Calls \u2013 you can\u2019t make any long distance calls.\n\nThe Standard Range Restrictions are:\n* Dial Plan Calls\n* Canada Calls\n* USA Calls\n* International Calls\n\nRange Restrictions can also be based on Time of Day:\n* Prime Time\n* Non-prime Time\n* Saturdays\n* Sundays and Holidays\n\nExample: Can only call the US during Prime Time\n\n\n",
+          "properties": {
+            "rangePrivilegeSetCode": {
+              "type": "string",
+              "example": "RP001",
+              "description": "Unique for organization."
+            },
+            "descriptionText": {
+              "type": "string",
+              "example": "Marketing #1"
+            },
+            "internationalAllCallsInd": {
+              "type": "string",
+              "description": " ",
+              "example": "N"
+            },
+            "dialplanAllCallsInd": {
+              "type": "string",
+              "description": " ",
+              "example": "N"
+            },
+            "usaAllCallsInd": {
+              "type": "string",
+              "description": " ",
+              "example": "N"
+            },
+            "canadaAllCallsInd": {
+              "type": "string",
+              "example": "N"
+            },
+            "rangePrivileges": {
+              "type": "array",
+              "description": "A range privilege set can be provisioned with no privileges.",
+              "items": {
+                "$ref": "#\/definitions\/LongDistanceIncludeExclude"
+              }
+            }
+          },
+          "required": [
+            "id",
+            "rangePrivilegeSetCode",
+            "internationalAllCallsInd",
+            "dialplanAllCallsInd",
+            "usaAllCallsInd",
+            "canadaAllCallsInd",
+            "serviceType"
+          ]
+        }
+      ]
+    },
+    "LongDistanceTspDynamicRoutingTn": {
+      "type": "string",
+      "title": "LongDistanceTspDynamicRoutingTn",
+      "minLength": 10,
+      "maxLength": 10,
+      "pattern": "[0-9]",
+      "example": "6044320000",
+      "description": "Optional feature for TSP."
+    },
+    "TollFreeService": {
+      "title": "TollFreeService",
+      "allOf": [
+        {
+          "$ref": "#\/definitions\/ServiceRefOrValue"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "tollFreeServicePlan": {
+              "allOf": [
+                {
+                  "$ref": "#\/definitions\/Service"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "characteristics": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#\/definitions\/Characteristic"
+                      }
+                    }
+                  }
+                },
+                {
+                  "$ref": "#\/definitions\/TollFreeFeatures"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "TollFreeFeatures": {
+      "title": "TollfreeFeatures",
+      "type": "object",
+      "properties": {
+        "tollFreeAreaRoutingService": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/TollFreeZoneAreaCodeRouting"
+          }
+        },
+        "tollFreeExchangeRoutingService": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/TollFreeZoneExchangeRouting"
+          }
+        },
+        "tollFreeTerminatingNumberService": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/TollFreeTerminatingNumber"
+          }
+        },
+        "tollFreeCallPrompterService": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/TollFreeCallPrompter"
+          }
+        },
+        "tollFreeCustomerAnnouncementService": {
+          "$ref": "#\/definitions\/TollFreeAnnouncementControl"
+        },
+        "tollFreeDatabaseRoutingService": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/TollFreeDatabaseRouting"
+          }
+        },
+        "tollFreeCustomerEnteredDigitsService": {
+          "$ref": "#\/definitions\/TollFreeDatabaseCustomerEnteredDigits"
+        },
+        "tollFreeCallAllocatorService": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/TollFreeCallAllocator"
+          }
+        },
+        "tollFreeCourtesyResponseService": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/TollFreeCourtesyResponse"
+          }
+        },
+        "tollFreeTimeAndDayRoutingService": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/TollFreeTimeAndDay"
+          }
+        },
+        "tollFreeCustomHolidayService": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/TollFreeCustomerDefinedHoliday"
+          }
+        },
+        "tollFreeEnrouteAnnouncementService": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/TollFreeEnrouteAnnouncement"
+          }
+        },
+        "tollFreeInterExchangeRouting": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/TollFreeInterExchange"
+          }
+        },
+        "tollFreeTenDigitRoutingService": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/TollFreeTenDigit"
+          }
+        },
+        "tollFreeStatutoryHolidayService": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/TollFreeStatutoryHoliday"
+          }
+        },
+        "tollFreeOverflowRoutingService": {
+          "type": "array",
+          "items": {
+            "$ref": "#\/definitions\/TollFreeOverflowRouting"
+          }
+        }
+      }
+    },
+    "TollFreeAnnouncementControl": {
+      "type": "object",
+      "title": "TollFreeAnnouncementControl",
+      "description": "The default value are specified for each TF number subscription in the TANNOUCEMENT_HEADER table\n\nOnly required if any of the following service nodes are included :\n\n* Courtesy Response (CR)\n* Call Prompter (CP)\n* Database Routing (DR)\n* Enroute Announcements (ER)",
+      "properties": {
+        "languageCode": {
+          "type": "string",
+          "example": "E"
+        },
+        "maximumRetriesNumber": {
+          "type": "number",
+          "example": 2
+        },
+        "starPoundInd": {
+          "type": "integer",
+          "example": 0
+        },
+        "startTimeOutNumber": {
+          "type": "integer",
+          "example": 2
+        },
+        "interDigitTimeOutNumber": {
+          "type": "integer",
+          "example": 2
+        },
+        "totalTimeOutNumber": {
+          "type": "integer",
+          "example": 5
+        },
+        "personalIdentificationNumber": {
+          "type": "number",
+          "example": 123
+        },
+        "announcements": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "customerAnnouncementId": {
+                "type": "number",
+                "example": 200000
+              },
+              "systemAnnouncementId": {
+                "type": "number",
+                "example": 3450
+              },
+              "customerAnnoucementDescriptionText": {
+                "type": "string",
+                "example": "Cust. Ann. (help desk)"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "serviceType",
+        "languageCode",
+        "maximumRetriesNumber",
+        "starPoundInd",
+        "startTimeOutNumber",
+        "interDigitTimeOutNumber",
+        "totalTimeOutNumber",
+        "personalIdentificationNumber",
+        "announcements"
+      ]
+    },
+    "TollFreeNode": {
+      "type": "object",
+      "title": "TollFreeNode",
+      "properties": {
+        "nodeTypeCode": {
+          "type": "string"
+        },
+        "nodeNumber": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 3,
+          "pattern": "[0-9]",
+          "example": "001"
+        }
+      },
+      "required": [
+        "nodeTypeCode",
+        "nodeNumber"
+      ]
+    },
+    "TollFreeDatabaseRouting": {
+      "type": "object",
+      "title": "TollFreeDatabaseRouting",
+      "description": "Database Routing feature node (DR)",
+      "properties": {
+        "currentNode": {
+          "$ref": "#\/definitions\/TollFreeNode"
+        },
+        "currentNodeName": {
+          "type": "string",
+          "example": "Database Routing #1"
+        },
+        "customerAnnouncementId": {
+          "type": "string",
+          "example": "1000123"
+        },
+        "defaultNextNode": {
+          "$ref": "#\/definitions\/TollFreeNode"
+        }
+      },
+      "required": [
+        "serviceType",
+        "currentNode",
+        "currentNodeName",
+        "customerAnnouncementId",
+        "defaultNextNode"
+      ]
+    },
+    "TollFreeCourtesyResponse": {
+      "type": "object",
+      "title": "TollFreeCourtesyResponse",
+      "description": "Courtesy Response terminal node (CR)",
+      "properties": {
+        "currentNode": {
+          "$ref": "#\/definitions\/TollFreeNode"
+        },
+        "currentNodeName": {
+          "type": "string",
+          "example": "Courtesy response #1"
+        },
+        "repeatInd": {
+          "type": "number",
+          "example": 1
+        },
+        "customerAnnouncementId": {
+          "type": "integer",
+          "example": 10000234
+        }
+      },
+      "required": [
+        "currentNode",
+        "currentNodeName",
+        "repeatInd",
+        "customerAnnouncementId"
+      ]
+    },
+    "TollFreeCallAllocator": {
+      "type": "object",
+      "title": "TollFreeCallAllocator",
+      "description": "Call Allocator feature node (CA)",
+      "properties": {
+        "currentNode ": {
+          "$ref": "#\/definitions\/TollFreeNode"
+        },
+        "currentNodeName": {
+          "type": "string",
+          "example": "Call allocator #1"
+        },
+        "percentageRouting": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "percentageNumber": {
+                "type": "number",
+                "example": 50
+              },
+              "nextNode": {
+                "$ref": "#\/definitions\/TollFreeNode"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "currentNode ",
+        "currentNodeName",
+        "percentageRouting"
+      ]
+    },
+    "TollFreeZoneAreaCodeRouting": {
+      "type": "object",
+      "title": "TollFreeZoneAreaCodeRouting",
+      "description": "Zone Area code feature node  (ZA)",
+      "properties": {
+        "currentNode": {
+          "$ref": "#\/definitions\/TollFreeNode"
+        },
+        "currentNodeName": {
+          "type": "string",
+          "example": "Area code routing #1"
+        },
+        "routingFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "fromZoneText": {
+                "type": "string",
+                "example": "CABC0"
+              },
+              "toZoneText": {
+                "type": "string",
+                "example": "CABCZ"
+              },
+              "nextNode": {
+                "$ref": "#\/definitions\/TollFreeNode"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "currentNode",
+        "currentNodeName",
+        "routingFilter"
+      ]
+    },
+    "TollFreeCallPrompter": {
+      "type": "object",
+      "title": "TollFreeCallPrompter",
+      "description": "Call Prompter feature node (CP)",
+      "properties": {
+        "currentNode": {
+          "$ref": "#\/definitions\/TollFreeNode"
+        },
+        "currentNodeName": {
+          "type": "string",
+          "example": "Call Prompter #1"
+        },
+        "customerAnnouncementId": {
+          "type": "number",
+          "example": 1002345
+        },
+        "defaultNode": {
+          "$ref": "#\/definitions\/TollFreeNode"
+        },
+        "promptedRouting": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "promptedDigitNumber": {
+                "type": "integer"
+              },
+              "decriptionText": {
+                "type": "string",
+                "example": "Prompt entry"
+              },
+              "nextNode": {
+                "$ref": "#\/definitions\/TollFreeNode"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "currentNode",
+        "currentNodeName",
+        "promptedRouting"
+      ]
+    },
+    "TollFreeZoneExchangeRouting": {
+      "type": "object",
+      "title": "TollFreeZoneExchangeRouting",
+      "description": "Zone eXchange feature node  (ZX)",
+      "properties": {
+        "currentNode": {
+          "$ref": "#\/definitions\/TollFreeNode"
+        },
+        "currentNodeName": {
+          "type": "string",
+          "example": "Zone exchange routing"
+        },
+        "routingFilter": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "fromZoneText": {
+                "type": "string",
+                "example": "BCAAAA00"
+              },
+              "toZoneText": {
+                "type": "string",
+                "example": "BCZZZZ99"
+              },
+              "nextNode": {
+                "$ref": "#\/definitions\/TollFreeNode"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "currentNode",
+        "currentNodeName",
+        "routingFilter"
+      ]
+    },
+    "TollFreeOverflowRouting": {
+      "type": "object",
+      "title": "TollFreeOverflowRouting",
+      "description": "Overflow Routing node feature (OR)",
+      "properties": {
+        "currentNode": {
+          "$ref": "#\/definitions\/TollFreeNode"
+        },
+        "currentNodeName": {
+          "type": "string",
+          "example": "Overflow #1"
+        },
+        "terminatingNumberNode": {
+          "$ref": "#\/definitions\/TollFreeNode"
+        },
+        "ringsNumber": {
+          "type": "number",
+          "example": 5
+        },
+        "noAnswerNextNode": {
+          "$ref": "#\/definitions\/TollFreeNode"
+        },
+        "busyNextNode": {
+          "$ref": "#\/definitions\/TollFreeNode"
+        }
+      },
+      "required": [
+        "currentNode",
+        "currentNodeName",
+        "terminatingNumberNode",
+        "ringsNumber",
+        "noAnswerNextNode",
+        "busyNextNode"
+      ]
+    },
+    "TollFreeTimeAndDay": {
+      "type": "object",
+      "title": "TollFreeTimeAndDay",
+      "description": "Time And Day of week routing feature node (TD)",
+      "properties": {
+        "currentNode": {
+          "$ref": "#\/definitions\/TollFreeNode"
+        },
+        "currentNodeName": {
+          "type": "string",
+          "example": "Time od Day\/week routing"
+        },
+        "timeZoneCode": {
+          "type": "string"
+        },
+        "matchNextNode": {
+          "$ref": "#\/definitions\/TollFreeNode"
+        },
+        "noMatchNextNode": {
+          "$ref": "#\/definitions\/TollFreeNode"
+        },
+        "timeAndDayRouting": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "startWeekDayCode": {
+                "type": "number"
+              },
+              "startTime": {
+                "type": "string",
+                "example": "0000"
+              },
+              "endWeekDayCode": {
+                "type": "number"
+              },
+              "endTime": {
+                "type": "string",
+                "example": "0000"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "currentNode",
+        "currentNodeName",
+        "timeZoneCode",
+        "matchNextNode",
+        "noMatchNextNode",
+        "timeAndDayRouting"
+      ]
+    },
+    "TollFreeTerminatingNumber": {
+      "type": "object",
+      "title": "TollFreeTerminatingNumber",
+      "description": "Terminating Number node terminal (TN)",
+      "properties": {
+        "currentNode": {
+          "$ref": "#\/definitions\/TollFreeNode"
+        },
+        "currentNodeName": {
+          "type": "string",
+          "example": "6044320000"
+        },
+        "telephoneNumber": {
+          "type": "string",
+          "example": "6044320000"
+        },
+        "natureCode": {
+          "type": "integer",
+          "example": 3
+        }
+      },
+      "required": [
+        "currentNode",
+        "currentNodeName",
+        "telephoneNumber",
+        "natureCode"
+      ]
+    },
+    "TollFreeDatabaseCustomerEnteredDigits": {
+      "type": "object",
+      "title": "TollFreeDatabaseCustomerEnteredDigits",
+      "properties": {
+        "customerEnteredDigits": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "customerDigitsString": {
+                "type": "string",
+                "example": "123456"
+              },
+              "descriptionText": {
+                "type": "string",
+                "example": "sales"
+              },
+              "nextNode": {
+                "$ref": "#\/definitions\/TollFreeNode"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "serviceType",
+        "customerEnteredDigits"
+      ]
+    },
+    "TollFreeCustomerDefinedHoliday": {
+      "type": "object",
+      "title": "TollFreeCustomerDefinedHoliday",
+      "description": "Customer defined Holiday feature node (CH)",
+      "properties": {
+        "currentNode": {
+          "$ref": "#\/definitions\/TollFreeNode"
+        },
+        "currentNodeName": {
+          "type": "string",
+          "example": "Csutomer Defined #1"
+        },
+        "timeZoneCode": {
+          "type": "string",
+          "example": "PST"
+        },
+        "matchNextNode": {
+          "$ref": "#\/definitions\/TollFreeNode"
+        },
+        "noMatchNextNode": {
+          "$ref": "#\/definitions\/TollFreeNode"
+        },
+        "customerHolidayRange": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "startDate": {
+                "type": "string",
+                "example": "20200123"
+              },
+              "endDate": {
+                "type": "string",
+                "example": "20200124"
+              },
+              "holidayNameText": {
+                "type": "string",
+                "example": "Company event"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "currentNode",
+        "currentNodeName",
+        "timeZoneCode",
+        "matchNextNode",
+        "noMatchNextNode",
+        "customerHolidayRange"
+      ]
+    },
+    "TollFreeEnrouteAnnouncement": {
+      "type": "object",
+      "title": "TollFreeEnrouteAnnouncement",
+      "description": "EnRoute announcements feature node (ER)",
+      "properties": {
+        "currentNode": {
+          "$ref": "#\/definitions\/TollFreeNode"
+        },
+        "currentNodeName": {
+          "type": "string",
+          "example": "Enroute #1"
+        },
+        "customerAnnouncementId": {
+          "type": "string",
+          "example": "100023"
+        },
+        "interruptableInd": {
+          "type": "string",
+          "example": "Y"
+        },
+        "nextNode": {
+          "$ref": "#\/definitions\/TollFreeNode"
+        }
+      },
+      "required": [
+        "currentNode",
+        "currentNodeName",
+        "customerAnnouncementId",
+        "interruptableInd",
+        "nextNode"
+      ]
+    },
+    "TollFreeInterExchange": {
+      "type": "object",
+      "title": "TollFreeInterExchange",
+      "description": "Inter-eXchange node feature (IX)",
+      "properties": {
+        "currentNode": {
+          "$ref": "#\/definitions\/TollFreeNode"
+        },
+        "currentNodeName": {
+          "type": "string",
+          "example": "Interexchange #1"
+        },
+        "interExchangeCarrierId": {
+          "type": "string",
+          "description": "4 digit code identifying the carrier"
+        },
+        "telephoneNumber": {
+          "type": "string",
+          "pattern": "[0-9]",
+          "example": "3043450000"
+        }
+      }
+    },
+    "TollFreeTenDigit": {
+      "type": "object",
+      "title": "TollFreeTenDigit",
+      "description": "Ten digit Routing feature node (TR)",
+      "properties": {
+        "currentNode": {
+          "$ref": "#\/definitions\/TollFreeNode"
+        },
+        "currentNodeName": {
+          "type": "string",
+          "example": "10 digit route #1"
+        },
+        "tenDigitRouting": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "fromTelephoneNumber": {
+                "type": "string",
+                "example": "6044320000"
+              },
+              "toTelephoneNumber": {
+                "type": "string",
+                "example": "6044320100"
+              },
+              "nextNode": {
+                "$ref": "#\/definitions\/TollFreeNode"
+              }
+            }
+          }
+        }
+      }
+    },
+    "TollFreeStatutoryHoliday": {
+      "type": "object",
+      "title": "TollFreeStatutoryHoliday",
+      "description": "Statutory Holiday node feature (SH)",
+      "properties": {
+        "currentNode": {
+          "$ref": "#\/definitions\/TollFreeNode"
+        },
+        "currentNodeName": {
+          "type": "string",
+          "example": "Stat Holidays Observed"
+        },
+        "timeZoneCode": {
+          "type": "string",
+          "example": "PDT"
+        },
+        "mactchNextNode": {
+          "$ref": "#\/definitions\/TollFreeNode"
+        },
+        "noMatchNextNode": {
+          "$ref": "#\/definitions\/TollFreeNode"
+        },
+        "statutoryHolidays": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "holidayId": {
+                "type": "string"
+              },
+              "holidayName": {
+                "type": "string",
+                "example": "Stat Holiday Name"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "currentNode",
+        "currentNodeName",
+        "timeZoneCode",
+        "mactchNextNode",
+        "noMatchNextNode"
+      ]
+    },
+    "Error": {
+      "description": "Used when an API throws an Error, typically with a HTTP error response-code (3xx, 4xx, 5xx)",
+      "type": "object",
+      "required": [
+        "code",
+        "reason"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Application relevant detail, defined in the API or a common list."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Explanation of the reason for the error which can be shown to a client user."
+        },
+        "message": {
+          "type": "string",
+          "description": "More details and corrective actions related to the error which can be shown to a client user."
+        },
+        "status": {
+          "type": "string",
+          "description": "HTTP Error code extension"
+        },
+        "referenceError": {
+          "type": "string",
+          "format": "uri",
+          "description": "URI of documentation describing the error."
+        },
+        "@baseType": {
+          "type": "string",
+          "description": "When sub-classing, this defines the super-class."
+        },
+        "@schemaLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships"
+        },
+        "@type": {
+          "type": "string",
+          "description": "When sub-classing, this defines the sub-class entity name."
+        }
+      }
+    }
+  }
+}
+
