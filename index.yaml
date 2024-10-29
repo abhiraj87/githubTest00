@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-   title: Developer Toolbox Projects API
+   title: Developer Toolbox Projects APIS
    description: Used by the Developer Toolbox, to create a project and get information about the list of projects
    contact:
       name: "api"
