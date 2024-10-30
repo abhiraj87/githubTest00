@@ -1,0 +1,15 @@
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- script: |
+    curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
+  displayName: 'Install Postman CLI'
+
+- task: CmdLine@2
+  displayName: 'Run automated API tests using Postman CLI'
+  inputs:
+    script: |
+        postman login --with-api-key PMAK-6721edb8d158f1001171811e-853ed8f53c83e0b3024847b865c3965fba
+        # Run your collection using Postman CLI
+        postman collection run "$(Build.SourcesDirectory)/postman/collections/RESTful API Basics #blueprint.json" --integration-id "59258-$(Build.BuildId)"
