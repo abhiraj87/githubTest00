@@ -22,6 +22,4 @@ jobs:
           GITHUB_WORKSPACE: ${{ github.workspace }}
           GITHUB_RUN_ID: ${{ github.run_id }}
         run: |
-          postman collection run "1127056-cb937e3a-b2fc-479f-97ee-38d52b2fc70e" --integration-id "53051-${GITHUB_RUN_ID}"
-          # Run your API using Postman CLI
-          postman api lint --integration-id 53051
+          postman collection run "${GITHUB_WORKSPACE}/postman/collections/RESTful API Basics #blueprint.json" --integration-id "59257-${GITHUB_RUN_ID}"
