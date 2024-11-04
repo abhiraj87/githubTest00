@@ -1,0 +1,15 @@
+pool:
+  vmImage: 'windows-latest'
+
+steps:
+- script: |
+    powershell.exe -NoProfile -InputFormat None -ExecutionPolicy AllSigned -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://dl-cli.pstmn.io/install/win64.ps1'))"
+  displayName: 'Install Postman CLI'
+
+- task: CmdLine@2
+  displayName: 'Run automated API tests using Postman CLI'
+  inputs:
+    script: |
+        postman login --with-api-key $(POSTMAN_API_KEY)
+        # Run your collection using Postman CLI
+        postman collection run "39131537-63c4db0e-9b6b-4499-9003-de9f35b18f16" --integration-id "170536-$(Build.BuildId)"
