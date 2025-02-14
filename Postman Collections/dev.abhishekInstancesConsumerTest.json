@@ -32,15 +32,28 @@
 			"response": []
 		},
 		{
-			"name": "abhisheknewRequest",
-			"id": "d750cf1d-99e5-474c-b413-2e4a7534faaf",
+			"name": "instanesConsumer",
+			"id": "22dae552-4ca7-450c-a9f7-cc7780aa1cfb",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "www.google.com"
+				"url": "www.postman.com"
+			},
+			"response": []
+		},
+		{
+			"name": "instancesConsumerReboot",
+			"id": "41f7d58b-16de-463f-b7af-f842fdaee816",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "www.postman.com"
 			},
 			"response": []
 		}
