@@ -69,6 +69,19 @@
 				"url": "www.postman.con"
 			},
 			"response": []
+		},
+		{
+			"name": "rollingBackDeployment",
+			"id": "52068960-c4cb-4427-bba5-153facc3a03f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "www.postman.com"
+			},
+			"response": []
 		}
 	]
 }
