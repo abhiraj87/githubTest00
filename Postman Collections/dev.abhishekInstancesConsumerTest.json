@@ -56,6 +56,19 @@
 				"url": "www.postman.com"
 			},
 			"response": []
+		},
+		{
+			"name": "instanceConsumerTerminate",
+			"id": "a3e7c5b2-f57c-4746-aa6a-9f0925c3761f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "www.postman.con"
+			},
+			"response": []
 		}
 	]
 }
