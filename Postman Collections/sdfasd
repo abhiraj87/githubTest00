@@ -1,0 +1,385 @@
+{
+  "AuthenticateEndpointsWith": [],
+  "Name": "apimatic",
+  "BaseUri": "https://www.postman.com",
+  "ServerConfiguration": {
+    "UseParent": false,
+    "DefaultEnvironment": "production",
+    "DefaultServer": "Server 1",
+    "Environments": [
+      {
+        "Name": "production",
+        "Servers": [
+          {
+            "Name": "Server 1",
+            "Url": "https://www.postman.com"
+          },
+          {
+            "Name": "Server 2",
+            "Url": "https://integrations.postman-beta.tech/authentication-instances"
+          }
+        ]
+      }
+    ],
+    "Parameters": []
+  },
+  "Version": "1.0",
+  "Contact": {},
+  "AdditionalHeaders": [],
+  "Authentication": {
+    "Type": "Basic",
+    "AuthType": "Basic",
+    "Parameters": [
+      {
+        "Name": "username",
+        "TestValue": "jenLIHZc6lUPo3pGyOUjItcUQEJj9um9ZIcfPBaShL6IEtpbt4Z4hWg0DJlKYBzDSivMz8nmWuT510eb82qbIWZ0wlyIi1WXE3mgahPnfTIm5xb3Yz1ZfYnsTE4cbGGXcONQ8qHBfPYpwJuEixkuzlALtKklSNVXZO5xqAdQlR0ijFVkSUwMp8Oty4sRuwUq1JBsEWDaSWxLOFOQHZDL8jOJwMEZnZRWNLuqW80yfSnT51muRjR3ruiPhlvHGU21W2K8DwKs45kdT1uVV9lP8fMhWnJb8HVU67w2vUCjJ5rEDepriLITQCuQu1Lzb9auu95gMf8Roe03Ks9wmMFu2kWex0i7b7ejbZxJDI8iqaBw01fBG7r3UAHh4A5OHqdwNiNRreAlKAxqSYGmNohxJImtaAHcBZTSJTlFxHDmHExYGjkPYIkl9TYtNPPlRtd5pIYE4ny0UreWLmQSEVNyE8kx12z159zYg0tLLMaFP1mYeP0brSKQEbBddbmtKnx5"
+      },
+      {
+        "Name": "password",
+        "TestValue": "V3lKguEeAsmK9y93mvX47twwdmWxKYYavfLGHPqBnVkN4RqhvW0x8FN88Dy8RarPFJmuG5L7tkHEPLKzcCKutMyub3v79MX93MwuxP4ty1wByjHnel3ygF8dRMy98qqeov4sgT3AFw1yh5FeNhdjGOKICrLh51XyXjFPyf7ebcmLVifveKb5ku0FtBF8aV23tr0VVYY16AR4JTUjrjeRZbgKpvAG9TdPr3x1dNLr3FEtcCEYTmxzj0xaTNYQPrP0hXA092c1iCdjM0zAvhmF8UDwYBYPjn91aR3Gz81kyvvcdg4rtZtwFVcWtRGWbJAoNzyd2wQPaOWKaKRSypc2aXuDB6IX8ZrGaXDlRJEoLMtUkmI4wyuCG0mcB3GFsfrFpdIbhmlHDVtiLdaXDQkqLhnjSPObs83m1HVK3KKA2IWVr2tBN288SX1R1Se9bvhL93dRMoThjY1LNazPVsijs3gUYmFF6mAbdvGsinYvq4pNygFq1kmgrOrckaaFz8ju"
+      }
+    ],
+    "Scopes": [],
+    "ParamFormats": {},
+    "AllowAdditionalOAuthFields": false,
+    "AdditionalOAuthFields": []
+  },
+  "AuthenticationSchemes": {
+    "basic": {
+      "AuthenticationType": "Basic",
+      "Parameters": [
+        {
+          "Name": "username",
+          "TestValue": "jenLIHZc6lUPo3pGyOUjItcUQEJj9um9ZIcfPBaShL6IEtpbt4Z4hWg0DJlKYBzDSivMz8nmWuT510eb82qbIWZ0wlyIi1WXE3mgahPnfTIm5xb3Yz1ZfYnsTE4cbGGXcONQ8qHBfPYpwJuEixkuzlALtKklSNVXZO5xqAdQlR0ijFVkSUwMp8Oty4sRuwUq1JBsEWDaSWxLOFOQHZDL8jOJwMEZnZRWNLuqW80yfSnT51muRjR3ruiPhlvHGU21W2K8DwKs45kdT1uVV9lP8fMhWnJb8HVU67w2vUCjJ5rEDepriLITQCuQu1Lzb9auu95gMf8Roe03Ks9wmMFu2kWex0i7b7ejbZxJDI8iqaBw01fBG7r3UAHh4A5OHqdwNiNRreAlKAxqSYGmNohxJImtaAHcBZTSJTlFxHDmHExYGjkPYIkl9TYtNPPlRtd5pIYE4ny0UreWLmQSEVNyE8kx12z159zYg0tLLMaFP1mYeP0brSKQEbBddbmtKnx5"
+        },
+        {
+          "Name": "password",
+          "TestValue": "V3lKguEeAsmK9y93mvX47twwdmWxKYYavfLGHPqBnVkN4RqhvW0x8FN88Dy8RarPFJmuG5L7tkHEPLKzcCKutMyub3v79MX93MwuxP4ty1wByjHnel3ygF8dRMy98qqeov4sgT3AFw1yh5FeNhdjGOKICrLh51XyXjFPyf7ebcmLVifveKb5ku0FtBF8aV23tr0VVYY16AR4JTUjrjeRZbgKpvAG9TdPr3x1dNLr3FEtcCEYTmxzj0xaTNYQPrP0hXA092c1iCdjM0zAvhmF8UDwYBYPjn91aR3Gz81kyvvcdg4rtZtwFVcWtRGWbJAoNzyd2wQPaOWKaKRSypc2aXuDB6IX8ZrGaXDlRJEoLMtUkmI4wyuCG0mcB3GFsfrFpdIbhmlHDVtiLdaXDQkqLhnjSPObs83m1HVK3KKA2IWVr2tBN288SX1R1Se9bvhL93dRMoThjY1LNazPVsijs3gUYmFF6mAbdvGsinYvq4pNygFq1kmgrOrckaaFz8ju"
+        }
+      ]
+    }
+  },
+  "Endpoints": [
+    {
+      "AuthenticateEndpointWith": [],
+      "Name": "New Request",
+      "HTTPMethod": "GET",
+      "Group": "Misc",
+      "RequiresAuthentication": true,
+      "Server": "Server 1",
+      "Route": "/",
+      "Responses": {},
+      "Response": {
+        "Optional": false,
+        "AnyOfTypes": [],
+        "AnyOfCasesMeta": [],
+        "OneOfTypes": [],
+        "OneOfCasesMeta": [],
+        "NotTypes": [],
+        "NotCasesMeta": [],
+        "Type": "Void",
+        "IsSdlNativeType": true,
+        "Constant": false,
+        "IsStream": false,
+        "IsAttribute": false,
+        "Examples": [],
+        "Nullable": false,
+        "NullableArrayItems": false,
+        "NullableMapValues": false,
+        "ReadOnly": false,
+        "WriteOnly": false,
+        "IsArray": false,
+        "IsMap": false,
+        "IsArrayOfMap": false,
+        "Deprecated": false,
+        "Name": "Response",
+        "DefaultValue": ""
+      },
+      "HasOptionalQueryParams": false,
+      "HasOptionalFieldParams": false,
+      "CollectParameters": false,
+      "Parameters": [],
+      "Errors": [],
+      "TestCases": [
+        {
+          "Name": "New Request",
+          "Enabled": true,
+          "ShouldPass": true,
+          "InputParameters": [],
+          "ExpectedStatus": "200",
+          "ExpectedHeaders": [],
+          "ExpectedHeadersAllowExtra": true,
+          "ExpectedBodyMatchMode": "NONE",
+          "ExpectedArrayOrderedMatching": false,
+          "ExpectedArrayCheckCount": false,
+          "ResponseMatchSchema": true
+        }
+      ],
+      "WrapBodyInObject": false,
+      "Deprecated": false,
+      "XmlRequest": false,
+      "XmlResponse": false,
+      "ErrorTemplates": {},
+      "SkipAdditionalHeaders": false
+    },
+    {
+      "AuthenticateEndpointWith": [
+        {
+          "AuthenticationToApply": {
+            "AuthenticationSchemeName": "basic",
+            "RequiredScopes": []
+          },
+          "OptionType": "Single",
+          "Description": ""
+        }
+      ],
+      "Name": "https://integrations.postman-beta.tech/authentication-instances/4c02f069-4460-4e14-ae82-0c56e68e9021?user_id=1128307&entityid=1128307&entitytype=user",
+      "HTTPMethod": "GET",
+      "Group": "Misc",
+      "RequiresAuthentication": true,
+      "Server": "Server 2",
+      "Route": "/f38f116b-ea3d-4e85-a3e6-7741fee68d77",
+      "Responses": {},
+      "Response": {
+        "Optional": false,
+        "AnyOfTypes": [],
+        "AnyOfCasesMeta": [],
+        "OneOfTypes": [],
+        "OneOfCasesMeta": [],
+        "NotTypes": [],
+        "NotCasesMeta": [],
+        "Type": "Void",
+        "IsSdlNativeType": true,
+        "Constant": false,
+        "IsStream": false,
+        "IsAttribute": false,
+        "Examples": [],
+        "Nullable": false,
+        "NullableArrayItems": false,
+        "NullableMapValues": false,
+        "ReadOnly": false,
+        "WriteOnly": false,
+        "IsArray": false,
+        "IsMap": false,
+        "IsArrayOfMap": false,
+        "Deprecated": false,
+        "Name": "Response",
+        "DefaultValue": ""
+      },
+      "HasOptionalQueryParams": false,
+      "HasOptionalFieldParams": false,
+      "CollectParameters": false,
+      "RequiredScopes": [],
+      "Parameters": [
+        {
+          "ParamFormat": "Query",
+          "AutoGeneratedOrModified": false,
+          "Optional": false,
+          "AnyOfTypes": [],
+          "AnyOfCasesMeta": [],
+          "OneOfTypes": [],
+          "OneOfCasesMeta": [],
+          "NotTypes": [],
+          "NotCasesMeta": [],
+          "Type": "Number",
+          "IsSdlNativeType": true,
+          "Constant": false,
+          "IsStream": false,
+          "IsAttribute": false,
+          "Example": "1128307",
+          "Examples": [],
+          "Nullable": false,
+          "NullableArrayItems": false,
+          "NullableMapValues": false,
+          "ReadOnly": false,
+          "WriteOnly": false,
+          "IsArray": false,
+          "IsMap": false,
+          "IsArrayOfMap": false,
+          "Deprecated": false,
+          "Name": "user_id",
+          "Description": "",
+          "DefaultValue": ""
+        }
+      ],
+      "Errors": [],
+      "TestCases": [
+        {
+          "Name": "https://integrations.postman-beta.tech/authentication-instances/4c02f069-4460-4e14-ae82-0c56e68e9021?user_id=1128307&entityid=1128307&entitytype=user",
+          "Enabled": true,
+          "ShouldPass": true,
+          "InputParameters": [
+            {
+              "IsNull": false,
+              "Name": "user_id",
+              "Value": "1128307"
+            }
+          ],
+          "ExpectedStatus": "200",
+          "ExpectedHeaders": [],
+          "ExpectedHeadersAllowExtra": true,
+          "ExpectedBodyMatchMode": "NONE",
+          "ExpectedArrayOrderedMatching": false,
+          "ExpectedArrayCheckCount": false,
+          "ResponseMatchSchema": true
+        }
+      ],
+      "WrapBodyInObject": false,
+      "Deprecated": false,
+      "XmlRequest": false,
+      "XmlResponse": false,
+      "ErrorTemplates": {},
+      "SkipAdditionalHeaders": false
+    }
+  ],
+  "EndpointGroups": [
+    {
+      "Name": "Misc",
+      "Description": ""
+    }
+  ],
+  "CustomTypes": [],
+  "UserDefinedImportedTypes": [],
+  "GlobalTypeCombinators": {},
+  "CodeGenSettings": {
+    "SynchronyMode": "Asynchronous",
+    "ModelSerializationScheme": "Json",
+    "ArraySerialization": "Indexed",
+    "Nullify404": false,
+    "UseHttpMethodPrefix": false,
+    "UseModelPrefix": false,
+    "UseExceptionPrefix": true,
+    "UseEnumPrefix": true,
+    "UseControllerPrefix": true,
+    "UseConstructorsForConfig": false,
+    "Timeout": 0.0,
+    "AndroidUseAppManifest": false,
+    "iOSUseAppInfoPlist": false,
+    "iOSGenerateCoreData": false,
+    "CollapseParamsToArray": false,
+    "RunscopeEnabled": false,
+    "AndroidHttpClient": "ANDROID_OK",
+    "JavaHttpClient": "JAVA_OK",
+    "ObjCHttpClient": "UNIREST",
+    "CSharpHttpClient": "UNIREST",
+    "NodeHttpClient": "NODE_REQUEST",
+    "JavaUsePropertiesConfig": false,
+    "PHPHttpClient": "UNIREST",
+    "EnablePHPComposerVersionString": false,
+    "EnableGlobalUserAgent": true,
+    "EnableAdditionalModelProperties": false,
+    "PreserveParameterOrder": true,
+    "ValidateRequiredParameters": false,
+    "AppendContentHeaders": true,
+    "GenerateInterfaces": false,
+    "UseCommonSDKLibrary": false,
+    "ParameterArrayFormat": "ParamArrayWithIndex",
+    "SecurityProtocols": [
+      "Ssl3",
+      "Tls"
+    ],
+    "GenerateTravisConfig": false,
+    "GenerateCircleConfig": false,
+    "GenerateAppveyorConfig": false,
+    "GenerateJenkinsConfig": false,
+    "EnableLogging": false,
+    "EnableHttpCache": false,
+    "Retries": 0,
+    "RetryInterval": 1.0,
+    "BackoffFactor": 2.0,
+    "StatusCodesToRetry": [
+      408,
+      413,
+      429,
+      500,
+      502,
+      503,
+      504,
+      521,
+      522,
+      524
+    ],
+    "RequestMethodsToRetry": [
+      "GET",
+      "PUT"
+    ],
+    "UserConfigurableRetries": true,
+    "GenerateAdvancedDocs": true,
+    "DisableDocs": false,
+    "StoreTimezoneInformation": false,
+    "UnderscoreNumbers": true,
+    "UseSingletonPattern": true,
+    "IgnoreIfNullJson": false,
+    "DisableLinting": false,
+    "SortResources": false,
+    "LiftParameterDescriptionFromCustomType": false,
+    "AllowSkippingSSLCertVerification": false,
+    "ApplyCustomizations": [],
+    "DoNotSplitWords": [],
+    "ReturnCompleteHttpResponse": false,
+    "ThrowForHttpErrorStatusCodes": true,
+    "GenerateModels": true,
+    "GenerateEnums": true,
+    "GenerateExceptions": true,
+    "ResponseMapping": {
+      "Type": "Simple"
+    },
+    "ForceKeywordArgsInRuby": false,
+    "SymbolizeHashKeysInRuby": false,
+    "UsageExampleEndpoint": {
+      "Description": "",
+      "EndpointGroupName": "",
+      "EndpointName": ""
+    },
+    "IsLatestVersion": false,
+    "CustomDependencies": [],
+    "EnableImmutableModels": false,
+    "UseEndpointMethodName": false,
+    "EncodeTemplateParameters": true,
+    "GenerateExamplesForOptionalFields": false,
+    "MultitargetDotnetVersions": false,
+    "BackoffMax": 0.0,
+    "RetryOnTimeout": true,
+    "EnableCookies": false,
+    "EnableJsonPassThroughForAny": false,
+    "PascalCaseEnumForCSharp": false,
+    "PascalCaseEnumForTypeScript": false,
+    "DisableMultipleAuth": false,
+    "AddSingleAuthDeprecatedCode": true,
+    "EnableExperimentalTypeCombinatorGeneration": false,
+    "UseSecuritySchemeNameForSingleAuth": false,
+    "EnableModelKeywordArgsInRuby": false,
+    "NullifyEmptyResponses": false,
+    "ExtendedAdditionalPropertiesSupport": false,
+    "EnforceStandardizedCasing": false,
+    "ErrorTemplates": {}
+  },
+  "Errors": [],
+  "TestGenSettings": {
+    "Configuration": {},
+    "TestTimeout": 30,
+    "PrecisionDelta": 0.01
+  },
+  "Roles": [],
+  "Namespaces": [],
+  "ExportSettings": {
+    "ExportExtensions": false,
+    "UseDateTimeOnlyInRaml": false,
+    "SetPostmanParamValuesAsVariables": false,
+    "WrapResponseFieldInWsdl": true,
+    "AllowEmptyTypeAttributesInXsd": false,
+    "WrapInputOutputTypesInElementInXsd": false,
+    "AddRefSiblingDataInAllOfSchema": true,
+    "EncodeUrlParamsInPostman": true,
+    "UseXsdBase64BinaryType": false,
+    "ExportXmlMetaData": true,
+    "ExportDiscriminatorMappingValues": true,
+    "ExportGlobalTypeCombinators": true,
+    "ExportAnyType": true,
+    "ExportOptionalParametersAsDisabled": false,
+    "ExportApiKeyAuthInPostman": true,
+    "GenerateSampleValueFromRegexPattern": false,
+    "UseHttpMethodPrefixForAutoGeneratedWsdlNames": true,
+    "ForceAllowModelExampleExportForSampleGeneration": false
+  }
+}
