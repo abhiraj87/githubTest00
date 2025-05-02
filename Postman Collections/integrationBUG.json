@@ -1,0 +1,260 @@
+{
+	"info": {
+		"_postman_id": "e5862a8c-d401-431c-87b7-90f01cfc3bc0",
+		"name": "[Monitor] Falcon #bifrost",
+		"description": "This service will validate the API design schema and the request based on the rulesets \nand reports the security warnings found during the scan.\n\nContact Support:\n Name: API Security Automation Squad\n Email: raghav.garg@postman.com",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Initial Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6c0d0e20-f2a1-4f59-a039-7a9f16bbde0c",
+								"exec": [
+									"try {",
+									"    const responseJson = pm.response.json();",
+									"    console.log('Hello', responseJson);",
+									"    console.log({responseJson});",
+									"",
+									"    if (pm.response.code !== 200) {",
+									"        postman.setNextRequest(null);",
+									"    }",
+									"",
+									"    pm.environment.set(\"admin_access_token\", responseJson.access_token)",
+									"",
+									"    pm.test(\"Should update access token successfully\", function () {",
+									"        pm.response.to.have.status(200);",
+									"    });",
+									"} catch (err) {",
+									"    console.log('Call to identity failed')",
+									"    console.log({err});",
+									"    postman.setNextRequest(null);",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "3fe2f862-4483-4dd4-80ec-6ae7e7c8ccf3",
+					"protocolProfileBehavior": {
+						"disableCookies": true,
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"{{admin_user_username}}\",\n    \"password\": \"{{admin_user_password}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{iam_url}}"
+					},
+					"response": []
+				}
+			],
+			"id": "6785fe33-fca8-4031-8cbf-3e201c25930b"
+		},
+		{
+			"name": "Scan",
+			"item": [
+				{
+					"name": "Subsequent edits",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();",
+									"",
+									"console.log('logging response - second', response);",
+									"",
+									"pm.test(\"should return a 200 status code\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"should return the correct issues\", () => {",
+									"    console.log(\"Subsequent edits\");",
+									"    console.log(JSON.stringify(response.issues,null,2));",
+									"    pm.expect(response.issues.length).to.be.greaterThan(0);",
+									"    // pm.expect(response.issues[0].message).to.eql('The info object should have a description.')",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"id": "e54ebcb8-363f-4881-bfdb-89b7f0740cb7"
+							}
+						}
+					],
+					"id": "8339f9fa-5b48-4a8a-8e47-377bbca00388",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"service\": \"{{bifrost_service_name}}\",\n    \"method\": \"post\",\n    \"path\": \"/definitions/{{definitionId}}/scan\",\n    \"query\": {\n        \"workspaceId\": \"{{workspaceId}}\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{proxy_url}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Warnings for definition in ws",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();",
+									"",
+									"console.log('Logging response - third', response);",
+									"",
+									"pm.test(\"should return a 200 status code\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"should return the correct issues\", () => {",
+									"    console.log(\"Persist security warnings\");",
+									"    console.log(JSON.stringify(response.issues,null,2));",
+									"    pm.expect(response.issues.length).to.be.greaterThan(0);",
+									"    // pm.expect(response.issues[0].message).to.eql('The info object should have a description.')",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"id": "dd174345-1294-4c4e-ac33-2a1aafac4e82"
+							}
+						}
+					],
+					"id": "329d0778-4014-4371-a169-4922b53ad6c5",
+					"protocolProfileBehavior": {
+						"disableCookies": true,
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"service\": \"{{bifrost_service_name}}\",\n    \"method\": \"post\",\n    \"path\": \"/definitions/{{definitionId}}/validations\",\n    \"query\": {\n        \"workspaceId\": \"{{workspaceId}}\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{proxy_url}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Raw Schema",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();",
+									"",
+									"pm.test(\"should return a 200 status code\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"should return the correct warnings\", () => {",
+									"    console.log(\"Raw Schema\");",
+									"    console.log(JSON.stringify(response.warnings,null,2));",
+									"    pm.expect(response.warnings.length).to.be.greaterThan(0);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"id": "29d8b3df-9c96-4262-ac14-1ea1ed7921f9"
+							}
+						}
+					],
+					"id": "67b3fd3d-4cac-4759-8548-9d02a3996f17",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"user-agent": true
+						},
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"service\": \"{{bifrost_service_name}}\",\n    \"method\": \"post\",\n    \"path\": \"/security/api-validation\",\n    \"body\": {\n        \"schema\": {\n            \"type\": \"openapi3\",\n            \"language\": \"yaml\",\n            \"schema\": \"openapi: '3.0.0'\\ninfo:\\n  version: '1.0.0'\\n  title: 'Sample API'\\n  description: Buy or rent spacecrafts\\n\\npaths:\\n  /spacecrafts/{spacecraftId}:\\n    parameters:\\n      - name: spacecraftId\\n        description: The unique identifier of the spacecraft\\n        in: path\\n        required: true\\n        schema:\\n          $ref: '#/components/schemas/SpacecraftId'\\n    get:\\n      summary: Read a spacecraft\\n      responses:\\n        '200':\\n          description: The spacecraft corresponding to the provided `spacecraftId`\\n          content:\\n            application/json:\\n              schema:\\n                $ref: '#/components/schemas/Spacecraft'\\n        404:\\n          description: No spacecraft found for the provided `spacecraftId`\\n          content:\\n            application/json:\\n              schema:\\n                $ref: '#/components/schemas/Error'\\n        500:\\n          description: Unexpected error\\n          content:\\n            application/json:\\n              schema:\\n                $ref: '#/components/schemas/Error'\\ncomponents:\\n  schemas:\\n    SpacecraftId:\\n      description: The unique identifier of a spacecraft\\n      type: string\\n    Spacecraft:\\n      type: object\\n      required:\\n        - id\\n        - name\\n        - type\\n      properties:\\n        id:\\n          $ref: '#/components/schemas/SpacecraftId'\\n        name:\\n          type: string\\n        type:\\n          type: string\\n          enum:\\n            - capsule\\n            - probe\\n            - satellite\\n            - spaceplane\\n            - station\\n        description:\\n          type: string\\n    Error:\\n      type: object\\n      required:\\n        - message\\n      properties:\\n        message:\\n          description: A human readable error message\\n          type: string\\n  securitySchemes:\\n    ApiKey:\\n      type: apiKey\\n      in: header\\n      name: X-Api-Key\\nsecurity:\\n  - ApiKey: []\"\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{proxy_url}}"
+					},
+					"response": []
+				}
+			],
+			"id": "737e4489-e51c-416b-b157-f3b05b5a9fc4"
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": {
+			"value": "{{admin_access_token}}",
+			"key": "x-access-token",
+			"in": "header"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				],
+				"id": "570cc088-9058-4608-b769-df6e37d137cb"
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				],
+				"id": "9b7205c3-e134-4f18-9175-1713eca2f8f7"
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://falcon.postman-beta.tech"
+		}
+	]
+}
